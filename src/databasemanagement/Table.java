@@ -17,5 +17,6 @@ public interface Table {
 	public void userHistory(Connection connect) throws SQLException, ClassNotFoundException;
 	public void admin(Connection connect) throws SQLException,ClassNotFoundException;
 	public void blockedUser(Connection connect) throws SQLException,ClassNotFoundException;
+	public void adminHistory(Connection connect) throws SQLException, ClassNotFoundException;
 
 }

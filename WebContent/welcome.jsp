@@ -396,20 +396,23 @@ input::placeholder {
 </style>
 
 <body>
- 
+ <% /**/
+
+if(session.getAttribute("username") == null) 
+ {%>
  
 <section class="user">
   <div class="user_options-container">
     <div class="user_options-text">
       <div class="user_options-unregistered">
         <h2 class="user_unregistered-title">Don't have an account?</h2>
-        <p class="user_unregistered-text">Manage you your</p>
+        <p class="user_unregistered-text"></p>
         <button class="user_unregistered-signup" id="signup-button">Sign up</button>
       </div>
 
       <div class="user_options-registered">
         <h2 class="user_registered-title">Have an account?</h2>
-        <p class="user_registered-text">Manage your user</p>
+        <p class="user_registered-text"></p>
         <button class="user_registered-login" id="login-button">Login</button>
       </div>
     </div>
@@ -420,17 +423,17 @@ input::placeholder {
         
         
         <!--login form-->
-        <form class="forms_form">
+        <form class="forms_form" action="login" method="post">
           <fieldset class="forms_fieldset">
             <div class="forms_field">
-              <input type="email" placeholder="Email" class="forms_field-input" required autofocus />
+              <input type="text" placeholder="username" name="username" class="forms_field-input" required autofocus />
             </div>
             <div class="forms_field">
-              <input type="password" placeholder="Password" class="forms_field-input" required />
+              <input type="password"  name="password" class="forms_field-input" required />
             </div>
           </fieldset>
-          <div class="forms_buttons">
-            <button type="button" class="forms_buttons-forgot">Forgot password?</button>
+          <div class="forms_buttons">          
+           <a href="login/resetpassword"><button type="button" class="forms_buttons-forgot">Forgot password?</button></a> 
             <input type="submit" value="Log In" class="forms_buttons-action">
           </div>
         </form>
@@ -438,7 +441,7 @@ input::placeholder {
       <div class="user_forms-signup" style="top: 10px;">
         <h2 class="forms_title">Sign Up</h2>
         <!--signup form -->
-        <form class="fo	ms_form" action="signup">
+        <form class="fo	ms_form" action="signup" method="post">
           <fieldset class="forms_fieldset">
             <div class="forms_field">
               <input type="text" placeholder="username" name="username" class="forms_field-input" required />
@@ -462,7 +465,11 @@ input::placeholder {
     </div>
   </div>
 </section>
-
+<%} 
+else{
+	response.sendRedirect("Dashboard");
+}
+%>
 <script type="text/javascript">
 /**
  * Variables
@@ -482,7 +489,7 @@ signupButton.addEventListener('click', () =>{
 /**
  * Add event listener to the "Login" button
  */
-loginButton.addEventListener('click', () => {
+loginButton.addEventListener('click', () =>{
   userForms.classList.remove('bounceLeft')
   userForms.classList.add('bounceRight')
 }, false)

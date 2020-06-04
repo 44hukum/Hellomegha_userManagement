@@ -4,11 +4,26 @@ import java.sql.SQLException;
 public class Initiate {
 	//currently support mysql only
 		private String databaseUrl="jdbc:mysql://";
-		//change credential here
+		/**
+		 * 
+		 * ***************************CHANGE BELOW HERE************************
+		 *  user name from wanu to you username
+		 *  pasword hukumGosain123 to your passowrd
+		 *  localhost to your local hostshow
+		 * 
+		 * 
+		 * ***/
 		private String user="wanu";
 		private String password="hukumGosain123";
 		private String host="localhost";
 		
+		/**
+		 * 
+		 * ***************************CHANGE  UP HERE************************
+		 * 
+		 * 
+		 * 
+		 * ***/
 		
 		public String getDatabaseUrl() {
 			return databaseUrl;

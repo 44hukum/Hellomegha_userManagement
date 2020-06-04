@@ -69,7 +69,7 @@ public class CreateDatabase implements Database{
 			table.admin(connection);
 			table.blockedUser(connection);
 			table.userHistory(connection);
-			
+			table.adminHistory(connection);
 			System.out.println("done!!");
 			return true;
 		}	

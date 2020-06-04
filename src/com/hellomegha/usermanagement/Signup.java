@@ -7,58 +7,89 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.SendResult;
 
 import com.hellomegha.databasequeries.DatabaseConnection;
+import com.hellomegha.databasequeries.FindUser;
+import com.hellomegha.databasequeries.InsertRecord;
 
 
 public class Signup extends HttpServlet{
 	private DatabaseConnection connection=new DatabaseConnection();
+	private int frequency =0;
 	private static final long serialVersionUID = 109090;
 	/**
-	 * change in source code changes everything
+	 * change in serail value code changes everything
 	 */
 	
 
 	public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession userSession=req.getSession();
+		
 		Connection con=connection.makeConnection();
 		try(PrintWriter out=resp.getWriter()){
 			
-			//user authentication
-			//user validation
-			//user creation
+			
+		
 			String username=req.getParameter("username");	
 			String email=req.getParameter("email");
-			//String password=req.getParameter("password");
 			String phonenumber=req.getParameter("phonenumber");
-			//Sql Statement
-			String sql="insert into userRegistration(username,email,phoneNumber) values(?,?,?)";
+			String password="helo";
 			
+			 ResultSet user=(new FindUser()).getUser(username);
+			//user authentication
 			
-			PreparedStatement statement=con.prepareStatement(sql);
-			statement.setString(1, username);
-			statement.setString(2, email);
-			statement.setString(3, phonenumber);
+			 if(user.next() == false) {
+			 
+			//user insertion in table UserRegistration and history
+			InsertRecord dataInsertion=new InsertRecord();
+			//user creation
+			boolean createUser=dataInsertion.intoUserRegistration(username, password, email, phonenumber);
 			
-			boolean stat=statement.execute();
-			
-			if(stat == false) {
-			
-			}
+				if(createUser) {
+					FindUser usern=new FindUser();
+					ResultSet recentuser=usern.getUser(username); 
+					  //create session
+					userSession.setAttribute("username",username);
+					 userSession.setAttribute("role", "user");
 					
-				
-				if(con !=null) {
-					con.close();
+					 while(recentuser.next()) {
+						 //get the user
+					userSession.setAttribute("id", recentuser.getInt("userID"));
+					userSession.setAttribute("firstname", recentuser.getString("firstName"));
+					userSession.setAttribute("lastname", recentuser.getString("lastName"));
+					userSession.setAttribute("email", recentuser.getString("email"));
+					userSession.setAttribute("phonenumber", recentuser.getString("phoneNumber"));
+					userSession.setAttribute("socialSite", recentuser.getString("SocialSiteLink"));
+					userSession.setAttribute("github", recentuser.getString("githubLink"));
+					userSession.setAttribute("status", recentuser.getString("status"));
+					userSession.setAttribute("profilepic", recentuser.getBlob("profilepic"));
+					
+					
+					dataInsertion.intoUserHistory(recentuser.getInt("userID"),"Created account");
+					  //create and log signup history
+					 dataInsertion.intoUserHistory(recentuser.getInt("userID"),"Successfull login"); //create
+					 // and log login history
+					 }
+					resp.sendRedirect("Dashboard");
 				}
-				
+			 } 		
+				 else { req.setAttribute("signupError", "user Already exist");
+				 RequestDispatcher tofirstpage=req.getRequestDispatcher("welcome.jsp");
+				 tofirstpage.forward(req, resp); }
+				 
+			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
+		}catch(Exception e) {
+			
 		}
 	
 }

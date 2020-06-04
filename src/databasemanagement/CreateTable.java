@@ -64,4 +64,19 @@ public class CreateTable implements Table {
 		
 	}
 
+	@Override
+	public void adminHistory(Connection connect) throws SQLException, ClassNotFoundException {
+		//schemas for adminHistory where UserId is a foreign key 
+		String query="create table adminHistory(adminID INT NOT NULL, FOREIGN KEY (adminID) REFERENCES admin (adminID) ON DELETE CASCADE,"
+				+ "Date DATE NOT NULL,time TIME NOT NULL,Activity_log VARCHAR(200) NOT NULL)";
+			try {
+			connect.prepareStatement(query).execute();
+			System.out.println("Table ********** adminHistory *********** creation ******** successfull ********* ");
+			}catch(Exception e) {
+				System.out.println("table adminHistorycreation unsuccessfull"+e);
+				
+			}
+		
+	}
+
 }

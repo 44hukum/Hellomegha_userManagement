@@ -8,6 +8,7 @@
  <link rel="stylesheet" type="text/css" href="./Resources/style.css">
 </head>
 <body>
+<% if(session.getAttribute("username") !=null) {%>
 <div class="area"></div>
 <nav class="main-menu">
             <ul>
@@ -76,7 +77,7 @@
 
             <ul class="logout">
                 <li>
-                   <a href="#">
+                   <a href="logout">
                          <i class="fa fa-power-off fa-2x"></i>
                         <span class="nav-text">
                             Logout
@@ -90,5 +91,10 @@
        <jsp:include page="profilechoicesecond.jsp"></jsp:include>
       		<jsp:include page="profilechoicesecond.jsp"></jsp:include>
         </section>
+        <%} 
+else{
+	response.sendRedirect("welcome.jsp");	 
+}
+        %>
 </body>
 </html>

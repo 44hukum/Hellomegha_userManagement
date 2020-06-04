@@ -8,32 +8,48 @@ import java.sql.SQLException;
 //creates the connection and returns the users
 public class FindUser implements UserRecord{
 	private DatabaseConnection connection=new DatabaseConnection();
+	ResultSet result=null;
 	
 	public ResultSet userTableRecord() throws SQLException {	//Takes the connection to the database
 		return connection.makeConnection().prepareStatement("select * from userRegistration;").executeQuery();
 	}
 	
 	public ResultSet getUser(String username) throws SQLException {	//checks if the user exist or not in the users database
+		try {
 		PreparedStatement statement=connection.makeConnection().prepareStatement("select * from userRegistration where "
 				+ "username=?");
 		statement.setString(1, username);
-		return statement.executeQuery();
+		result=statement.executeQuery();
+		}catch(Exception e)	{
+			return result;
+		}
+		return result;
 				
 	}//end of is user
 	
-	//for admin
+	/*
+	 * Get the Admin details
+	 * */
 	public ResultSet adminTableRecord() throws SQLException{	 //Takes the connection to the database
 				return connection.makeConnection().prepareStatement("select * from admin;").executeQuery();
 	}
-
+		//returns all the given user
 	public ResultSet getAdmin(String username) throws SQLException {	//checks if the user exist or not in the users database
-		PreparedStatement statement=connection.makeConnection().prepareStatement("select * from admin where "
-				+ "username=?");
-		statement.setString(1, username);
-		return statement.executeQuery();
-				
+			PreparedStatement statement=connection.makeConnection().prepareStatement("select * from admin where "
+					+ "username=?");
+			statement.setString(1, username);
+			return statement.executeQuery();
+			
 	}
-	
+	//for a particular user
+	public ResultSet getAdmin(String username,String password) throws SQLException {	//checks if the user exist or not in the users database
+		PreparedStatement statement=connection.makeConnection().prepareStatement("select * from admin where "
+				+ "username=? AND password=?");
+		statement.setString(1, username);
+		statement.setString(2, password);
+		return statement.executeQuery();
+		
+}
 	/*
 	 *returns the userHistory 
 	 * */
@@ -65,6 +81,9 @@ public class FindUser implements UserRecord{
 		return statement.executeQuery();		
 	}
 	
+	/*
+	 * returns the admin history
+	 * */
 	public static void main(String[] args) throws SQLException {
 		FindUser obj=new FindUser();
 		System.out.println(obj.getUser("hukum"));
