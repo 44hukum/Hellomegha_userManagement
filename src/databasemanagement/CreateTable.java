@@ -10,8 +10,8 @@ public class CreateTable implements Table {
 		//schemas for user Registration //user id must be changed to varchar autoincrement using Trigger
 		String query="create table userRegistration(userID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,username VARCHAR(150) UNIQUE NOT NULL,"
 				+ "password VARCHAR(15) NOT NULL,firstName VARCHAR(100), lastName VARCHAR(100), email VARCHAR(150) UNIQUE NOT NULL,phoneNumber VARCHAR(18) NOT NULL,"
-				+ "githubLink VARCHAR(100) UNIQUE, SocialSitelinK VARCHAR(100) UNIQUE,Status VARCHAR(15) DEFAULT 'Active',"
-				+ "role varchar(10) DEFAULT 'user',profilepic blob)";
+				+ "githubLink VARCHAR(100) UNIQUE,Status VARCHAR(15) DEFAULT 'Active',"
+				+ "role varchar(10) DEFAULT 'user',profilepic blob,About VARCHAR(400), Address VARCHAR(60))";
 		try {
 		connect.prepareStatement(query).execute();
 		System.out.println("table userRegistration creation success");
@@ -39,7 +39,7 @@ public class CreateTable implements Table {
 	public void admin(Connection connect) throws SQLException, ClassNotFoundException {
 		String query="create table admin(adminID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,username VARCHAR(150) UNIQUE NOT NULL,"
 				+ "password VARCHAR(15) NOT NULL,firstName VARCHAR(100), lastName VARCHAR(100), email VARCHAR(150) UNIQUE NOT NULL,phoneNumber VARCHAR(18) NOT NULL,"
-				+ "githubLink VARCHAR(100) UNIQUE,profilepic blob,SocialSitelinK VARCHAR(100) UNIQUE,role varchar(10) DEFAULT 'admin')";
+				+ "githubLink VARCHAR(100) UNIQUE,profilepic blob,role varchar(10) DEFAULT 'admin',About VARCHAR(400), Address VARCHAR(60))";
 			try {
 			connect.prepareStatement(query).execute();
 			System.out.println("Table **********  *********** creation ******** successfull ********* ");

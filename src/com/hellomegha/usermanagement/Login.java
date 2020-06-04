@@ -51,6 +51,7 @@ public class Login extends HttpServlet{
 	 FindUser user=new FindUser();
 	 
 	 try(PrintWriter out=response.getWriter()) {
+		
 		 ResultSet result=user.getAdmin(username,password); //if the user exist as a admin then result is not empty
 		 if(result.next() == false) { //user pass 
 			ResultSet res=user.getUser(username);
@@ -108,10 +109,12 @@ public class Login extends HttpServlet{
 	}
 	}
 	 //redirect the user to the dashboard is found
-	 else {
+	 else if(session.getAttribute("username") !=null){
 		 response.sendRedirect("Dashboard");
 	 }//end of redirection
-		
+	 else {
+		 response.sendRedirect("welcome.jsp");
+	 }
 	
  }
  

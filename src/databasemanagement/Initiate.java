@@ -16,6 +16,7 @@ public class Initiate {
 		private String user="wanu";
 		private String password="hukumGosain123";
 		private String host="localhost";
+                
 		
 		/**
 		 * 

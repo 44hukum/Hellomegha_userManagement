@@ -39,19 +39,13 @@ public class Logout extends HttpServlet{
 			}
 			
 			session.removeAttribute("data");
-			session.removeAttribute("firstname");
-			session.removeAttribute("lastname");
-			session.removeAttribute("email");
-			session.removeAttribute("phonenumber");
-			session.removeAttribute("spcialSite");
-			session.removeAttribute("github");
-			session.removeAttribute("status");
-			session.removeAttribute("profilepic");
 		}
 		else {
 	
 			try {
 				(new InsertRecord()).intoUserHistory((Integer)session.getAttribute("id"),"Successfully logged out of the system");
+				session.removeAttribute("id");
+			
 			} catch (SQLException e) {
 				
 				e.printStackTrace();

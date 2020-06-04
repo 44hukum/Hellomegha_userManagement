@@ -55,8 +55,7 @@ public class CreateDatabase implements Database{
 		
 	
 		database.close();	//close the resultset
-		
-		
+			
 		boolean isResultSet=connection.prepareStatement("create database userManagement").execute(); //prepared statement create database name 
 		if( isResultSet == false) {
 			System.out.println("creating ********** usermanagement *********** database ********* ");

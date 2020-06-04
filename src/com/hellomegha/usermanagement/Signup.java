@@ -60,23 +60,11 @@ public class Signup extends HttpServlet{
 					 userSession.setAttribute("role", "user");
 					
 					 while(recentuser.next()) {
-						 //get the user
-					userSession.setAttribute("id", recentuser.getInt("userID"));
-					userSession.setAttribute("firstname", recentuser.getString("firstName"));
-					userSession.setAttribute("lastname", recentuser.getString("lastName"));
-					userSession.setAttribute("email", recentuser.getString("email"));
-					userSession.setAttribute("phonenumber", recentuser.getString("phoneNumber"));
-					userSession.setAttribute("socialSite", recentuser.getString("SocialSiteLink"));
-					userSession.setAttribute("github", recentuser.getString("githubLink"));
-					userSession.setAttribute("status", recentuser.getString("status"));
-					userSession.setAttribute("profilepic", recentuser.getBlob("profilepic"));
-					
-					
-					dataInsertion.intoUserHistory(recentuser.getInt("userID"),"Created account");
-					  //create and log signup history
-					 dataInsertion.intoUserHistory(recentuser.getInt("userID"),"Successfull login"); //create
-					 // and log login history
-					 }
+					userSession.setAttribute("id", recentuser.getInt("userID")); 	 //get the user id						
+					dataInsertion.intoUserHistory(recentuser.getInt("userID"),"Created account"); //create and log signup history
+				 dataInsertion.intoUserHistory(recentuser.getInt("userID"),"Successfull login"); //create and log login history
+				 }
+				
 					resp.sendRedirect("Dashboard");
 				}
 			 } 		
@@ -85,8 +73,7 @@ public class Signup extends HttpServlet{
 				 tofirstpage.forward(req, resp); }
 				 
 			
-		} catch (SQLException e) {
-			
+		} catch (SQLException e) {			
 			e.printStackTrace();
 		}catch(Exception e) {
 			

@@ -9,6 +9,8 @@
 </head>
 <body>
 <% if(session.getAttribute("username") !=null) {%>
+
+
 <div class="area"></div>
 <nav class="main-menu">
             <ul>

@@ -1,26 +1,51 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
 <link rel="stylesheet" type="text/css" href="./Resources/css/profilesecond.css">
 <link rel="stylesheet" type="text/css" href="./Resources/style.css">
 
 <section>
+  <% String description="I am a Worker here,";
+  	String username=(String)session.getAttribute("username");
+  	String email="";
+  	String phonenumber="";
+  	String githublink="#";
+  	
+  	String address="Nepal";
+  	String firstname="";
+  	String lastname="";
+  	/*  for all the dynamically changing user details */
+  	if(session.getAttribute("data") !=null) {
+			ResultSet result=(ResultSet) session.getAttribute("data");
+			try {
+				System.out.println("helsdsdo"+result.getString("username"));
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+		}
+ 		
+      %>
   <div class="wrapper">  
   <div class="profile-card js-profile-card">
     <div class="profile-card__img">
-      <img src="./Resources/ishan.jpg" alt="profile card">
+    <!-- blob should be managed properly -->
+      <img src="<%= session.getAttribute("profilepic") %>" alt="profile pic">
     </div>
 
     <div class="profile-card__cnt js-profile-cnt">
-      <div class="profile-card__name">Ishan Shrestha</div>
-      <div class="profile-card__txt">Front-end Developer from <strong>Kathmandu</strong></div>
+      <div class="profile-card__name"><%=username %></div>
+    
+      <div class="profile-card__txt"><%= description %><strong> helloMegha</strong></div>
       <div class="profile-card-loc">
         <span class="profile-card-loc__icon">
           <svg class="icon"><use xlink:href="#icon-location"></use></svg>
         </span>
 
         <span class="profile-card-loc__txt">
-        Kathmandu Nepal
+     <%=address %>
         </span>
       </div>
-
+<!-- 
       <div class="profile-card-inf">
         <div class="profile-card-inf__item">
           <div class="profile-card-inf__title">1598</div>
@@ -37,31 +62,31 @@
           <div class="profile-card-inf__title">85</div>
           <div class="profile-card-inf__txt">commit</div>
         </div>
-      </div>
+      </div> -->
 <!-- social media site link -->
 
       <div class="profile-card-social">
 <!-- facebook link -->
-        <a href="#" class="profile-card-social__item facebook" target="_blank">
+    <!--     <a href="#" class="profile-card-social__item facebook" target="_blank">
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-facebook"></use></svg>
           </span>
-        </a>
-<!-- twiter link  -->       <a href="#" class="profile-card-social__item twitter" target="_blank">
+        </a> --><!-- 
+<!-- twiter link  -->       <!-- <a href="#" class="profile-card-social__item twitter" target="_blank">
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-twitter"></use></svg>
           </span>
-        </a>
+        </a> --> 
 <!-- instagram -->
-        <a href="instagram" class="profile-card-social__item instagram" target="_blank">
+       <!--  <a href="instagram" class="profile-card-social__item instagram" target="_blank">
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-instagram"></use></svg>
           </span>
-        </a>
+        </a> -->
 
     
  <!-- sociial side link github -->
-        <a href="#" class="profile-card-social__item github" target="_blank">
+        <a href="<%=githublink%>" class="profile-card-social__item github" >
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-github"></use></svg>
           </span>
@@ -80,10 +105,10 @@
     for user profile
       <form class="profile-card-form" action="welcome.jsp">
         <div class="profile-card-form__container">
-         <input type="text" name="username" placeholder="username">
-          <input type="text" name="location" placeholder="location">
-           <input type="text" name="email" placeholder="E-mail">
-            <input type="text" name="githublink" placeholder="githublink">
+         <input type="text" name="username" placeholder="username" value="<%= username%>">
+          <input type="text" name="address" placeholder="address" value="<%= address%>">
+           <input type="text" name="email" placeholder="E-mail" value="<%=email%>">
+            <input type="text" name="githublink" placeholder="githublink" <%= githublink%>>
              
                      
         </div>
