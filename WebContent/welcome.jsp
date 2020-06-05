@@ -402,7 +402,9 @@ input::placeholder {
 </style>
 
 <body>
-
+<%
+if(session.getAttribute("username") == null){
+%>
  
 <section class="user">
   <div class="user_options-container">
@@ -422,8 +424,13 @@ input::placeholder {
     
     <div class="user_options-forms" id="user_options-forms">
       <div class="user_forms-login">
-          <h2 class="forms_title">Login</h2>
-        
+          <%String loginError="";
+          if(session.getAttribute("loginError") !=null){
+          loginError=(String)session.getAttribute("loginError");
+          }
+          %>
+          <h2 class="forms_title">Login</h2> <span><%= loginError%></span>
+        <% session.removeAttribute("loginError");%>
         
         <!--login form-->
         <form class="forms_form" action="login" method="post">
@@ -472,7 +479,10 @@ input::placeholder {
     </div>
   </div>
 </section>
-   
+<%} else{
+        response.sendRedirect("Dashboard");
+
+}%>   
 <script type="text/javascript">
 /**
  * Variables
@@ -497,5 +507,6 @@ loginButton.addEventListener('click', () =>{
   userForms.classList.add('bounceRight')
 }, false)
 </script>
+
 </body>
 </html>

@@ -23,12 +23,45 @@ public class Login extends HttpServlet{
 	 * 
 	 */
 	
-	private FindUser userdetails=new FindUser();
-	
- public void doPost(HttpServletRequest request,HttpServletResponse response)
+	 public void doPost(HttpServletRequest request,HttpServletResponse response)
          throws IOException, ServletException {
-        	
-         System.out.println("hello world");       
- }
- 
+             HttpSession session=request.getSession();
+             try(PrintWriter out=response.getWriter()){
+                 //take the password and username
+             String username=request.getParameter("username");
+             String password=request.getParameter("password");
+             
+                 try {
+                     //1.
+                     ResultSet isAdmin=(new FindUser()).getAdmin(username); //check and validate admin admin                    
+                              while(isAdmin.next()){
+                              if(isAdmin.getString("password").toString().equals(password)){
+                                  session.setAttribute("username", username);
+                                  session.setAttribute("role", "admin");
+                                  session.setAttribute("userID",isAdmin.getInt("adminId"));
+                                  response.sendRedirect("Dashboard");
+                                  }              
+                              }
+                           
+                              
+                         //2.                   //for user
+                         ResultSet isUser=(new FindUser()).getUser(username);
+                          while(isUser.next()){
+                            if(isUser.getString("password").equals(password)){
+                               session.setAttribute("username", username);
+                                  session.setAttribute("role", "user");
+                                  session.setAttribute("userID",isUser.getInt("userId"));
+                                  response.sendRedirect("Dashboard");
+                              }
+                            }               
+                          
+                          //3.
+                          session.setAttribute("loginError","Wrong credential");
+                          response.sendRedirect("welcome.jsp");
+                     } catch (SQLException ex) {
+                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                 }catch(NullPointerException e){}
+                 catch(Exception e){}
+             }
+         }
 }
