@@ -2,83 +2,92 @@ package com.hellomegha.usermanagement;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.SendResult;
 
 import com.hellomegha.databasequeries.DatabaseConnection;
 import com.hellomegha.databasequeries.FindUser;
 import com.hellomegha.databasequeries.InsertRecord;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Signup extends HttpServlet{
-	private DatabaseConnection connection=new DatabaseConnection();
-	private int frequency =0;
-	private static final long serialVersionUID = 109090;
+	
 	/**
-	 * change in serail value code changes everything
+	 * 
 	 */
 	
 
-	public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession userSession=req.getSession();
-		
-		Connection con=connection.makeConnection();
-		try(PrintWriter out=resp.getWriter()){
-			
-			
-		
-			String username=req.getParameter("username");	
-			String email=req.getParameter("email");
-			String phonenumber=req.getParameter("phonenumber");
-			String password="helo";
-			
-			 ResultSet user=(new FindUser()).getUser(username);
-			//user authentication
-			
-			 if(user.next() == false) {
-			 
-			//user insertion in table UserRegistration and history
-			InsertRecord dataInsertion=new InsertRecord();
-			//user creation
-			boolean createUser=dataInsertion.intoUserRegistration(username, password, email, phonenumber);
-			
-				if(createUser) {
-					FindUser usern=new FindUser();
-					ResultSet recentuser=usern.getUser(username); 
-					  //create session
-					userSession.setAttribute("username",username);
-					 userSession.setAttribute("role", "user");
-					
-					 while(recentuser.next()) {
-					userSession.setAttribute("id", recentuser.getInt("userID")); 	 //get the user id						
-					dataInsertion.intoUserHistory(recentuser.getInt("userID"),"Created account"); //create and log signup history
-				 dataInsertion.intoUserHistory(recentuser.getInt("userID"),"Successfull login"); //create and log login history
-				 }
-				
-					resp.sendRedirect("Dashboard");
-				}
-			 } 		
-				 else { req.setAttribute("signupError", "user Already exist");
-				 RequestDispatcher tofirstpage=req.getRequestDispatcher("welcome.jsp");
-				 tofirstpage.forward(req, resp); }
-				 
-			
-		} catch (SQLException e) {			
-			e.printStackTrace();
-		}catch(Exception e) {
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+                //creates the session
+                HttpSession session=req.getSession();
+		try{
+                    //get Attributes from welcome.jsp for a login
+                        String username= req.getParameter("username");	
+			String email= req.getParameter("email");
+			String phonenumber= req.getParameter("phonenumber");
+			String password=req.getParameter("password");
+                    //check wether the user exist or not
+                    FindUser user=new FindUser();
+                    ResultSet isAuser=user.getUser(username);
+                    
+               if(isAuser.next() == false){ //checks wether the user already exist or not    
+                    isAuser.close();
+                    InsertRecord insertRecord=new InsertRecord();
+                    boolean result=insertRecord.intoUserRegistration(username, password, email, phonenumber);
+                    if(result){ //if the user creation is successfull
+                       
+                        //getuser 
+                          ResultSet userData=user.getUser(username);
+                        //set history user creation time and user login time
+                        while(userData.next()){
+                     
+                        //create session
+                        session.setAttribute("username", username);
+                        session.setAttribute("userID", userData.getInt("userID"));
+                           insertRecord.intoUserHistory(userData.getInt("userID"),"Account created");
+                        } //session creation successfull and histiry creation to
+                        userData.close();
+                        resp.sendRedirect("Dashboard");
+                      } 
+                    else{
+                    session.setAttribute("error", "User creation unsuccessfull please try again in 30sec");
+                    session.setMaxInactiveInterval(10);
+                    resp.sendRedirect("welcome.jsp");
+                   }
+                }//endif
+                   else{
+                    session.setAttribute("error", "user already exist!");
+                    session.setMaxInactiveInterval(10);
+                    resp.sendRedirect("welcome.jsp");
+                   }
+                }  catch (SQLException ex) {
+                Logger.getLogger(Signup.class.getName()).log(Level.SEVERE, null, ex);
+                  }         		
+                  catch(Exception e) {
 			
 		}
 	
+}           
+        //when the servlet is refreshed and set for forgetpassword 
+        public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	         
+            HttpSession userSession=req.getSession();
+		
+		
+		try(PrintWriter out=resp.getWriter()){out.println("hello  i am from inside get");	
+                }		
+                    catch(Exception e) {
+			
+		}
+        
 }
-
 }

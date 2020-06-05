@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 
 import com.hellomegha.databasequeries.InsertRecord;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Logout extends HttpServlet{
 	/**
@@ -21,42 +23,17 @@ public class Logout extends HttpServlet{
 	private static final long serialVersionUID = 1089;
 
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
-		
-		if(session.getAttribute("id")==null) {
-			ResultSet res=(ResultSet) session.getAttribute("data");
-			//saving logout history
-			try {
-				if(session.getAttribute("role").equals("admin")) {
-					(new InsertRecord()).intoAdminHistory(res.getInt("adminID"),"Successfully logged out of the system");
-				}
-				else if(session.getAttribute("role").equals("user")) {
-					(new InsertRecord()).intoUserHistory(res.getInt("userID"),"Successfully logged out of the system");
-				}	
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			session.removeAttribute("data");
-		}
-		else {
-	
-			try {
-				(new InsertRecord()).intoUserHistory((Integer)session.getAttribute("id"),"Successfully logged out of the system");
-				session.removeAttribute("id");
-			
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			}
-		}
-		//deleting all the session
-		session.removeAttribute("username");
-		session.removeAttribute("role");
-		System.out.println(session.getAttribute("username"));
-	//logging out of the system0
-		response.sendRedirect("welcome.jsp");
+            try {
+                HttpSession session=request.getSession();
+                Integer userId=(Integer) session.getAttribute("userID");
+                //save history
+                (new InsertRecord()).intoUserHistory(userId,"Successfully logged out of the system");
+                session.removeAttribute("username");
+                session.removeAttribute("userID");
+                response.sendRedirect("welcome.jsp");
+            } catch (SQLException ex) {
+                Logger.getLogger(Logout.class.getName()).log(Level.SEVERE, null, ex);
+            }
 		
 	}
 }

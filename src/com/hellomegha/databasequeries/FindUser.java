@@ -1,15 +1,21 @@
 package com.hellomegha.databasequeries;
 
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //creates the connection and returns the users
 public class FindUser implements UserRecord{
 	private DatabaseConnection connection=new DatabaseConnection();
 	ResultSet result=null;
 	
+        //use the usermanagement database
+      
 	public ResultSet userTableRecord() throws SQLException {	//Takes the connection to the database
 		return connection.makeConnection().prepareStatement("select * from userRegistration;").executeQuery();
 	}

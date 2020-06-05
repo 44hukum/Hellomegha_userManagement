@@ -1,3 +1,9 @@
+<%@page import="com.hellomegha.databasequeries.DatabaseConnection"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="dataAccessLayer.ReadTable"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -396,8 +402,15 @@ input::placeholder {
 </style>
 
 <body>
+    
  <% /**/
+ if(session.getAttribute("error") !=null){
+ %>
+ <h1><%=session.getAttribute("error")%></h1>
+    <%
 
+ }
+     session.removeAttribute("error");
 if(session.getAttribute("username") == null) 
  {%>
  
@@ -453,7 +466,7 @@ if(session.getAttribute("username") == null)
               <input type="phone" placeholder="phonenumber" name="phonenumber" class="forms_field-input" required />
             </div>
              <div class="forms_field">
-              <input type="password" placeholder="conform password" class="forms_field-input"  />
+              <input type="password" placeholder="conform password" name="password" class="forms_field-input"  />
             </div>           
           </fieldset>
            <input type="checkbox">I agree to accept Terms and condition 

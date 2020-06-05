@@ -8,7 +8,6 @@
  <link rel="stylesheet" type="text/css" href="./Resources/style.css">
 </head>
 <body>
-<% if(session.getAttribute("username") !=null) {%>
 
 
 <div class="area"></div>
@@ -91,12 +90,8 @@
         <section>
   
        <jsp:include page="profilechoicesecond.jsp"></jsp:include>
-      		<jsp:include page="profilechoicesecond.jsp"></jsp:include>
+      		
         </section>
-        <%} 
-else{
-	response.sendRedirect("welcome.jsp");	 
-}
-        %>
+       
 </body>
 </html>

@@ -1,32 +1,35 @@
 package com.hellomegha.usermanagement;
 
+import com.hellomegha.databasequeries.InsertRecord;
 import java.io.IOException;
-import java.sql.ResultSet;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-
-import javax.servlet.RequestDispatcher;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hellomegha.databasequeries.FindUser;
 
 public class Dashboard extends HttpServlet{
-public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	HttpSession session=request.getSession();
+       
+        //saving history
+         try {
+            Integer userId=(Integer) session.getAttribute("userID");
+        (new InsertRecord()).intoUserHistory(userId,"Successfully logged in to the system");
+        } catch (SQLException ex) {
+         Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+          }
+    
+    
+        try(PrintWriter write=response.getWriter()){
+        write.print(session.getAttribute("userID"));
+        response.sendRedirect("homepage.jsp");
+        }
 	
-	if(session.getAttribute("username") !=null) {
-	response.sendRedirect("homepage.jsp");
-	
-	}
-	
-	else {
-		//if the session is deleted then is returned to the welcome page
-	response.sendRedirect("welcome.jsp");
-				
-		
-	}
 }
 }
