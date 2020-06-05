@@ -11,8 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Hello Megha</title>
-
 </head>
+
 <style>
 /**
  * General variables
@@ -402,17 +402,7 @@ input::placeholder {
 </style>
 
 <body>
-    
- <% /**/
- if(session.getAttribute("error") !=null){
- %>
- <h1><%=session.getAttribute("error")%></h1>
-    <%
 
- }
-     session.removeAttribute("error");
-if(session.getAttribute("username") == null) 
- {%>
  
 <section class="user">
   <div class="user_options-container">
@@ -432,7 +422,7 @@ if(session.getAttribute("username") == null)
     
     <div class="user_options-forms" id="user_options-forms">
       <div class="user_forms-login">
-        <h2 class="forms_title">Login</h2>
+          <h2 class="forms_title">Login</h2>
         
         
         <!--login form-->
@@ -451,8 +441,12 @@ if(session.getAttribute("username") == null)
           </div>
         </form>
       </div>
+        
+        
       <div class="user_forms-signup" style="top: 10px;">
         <h2 class="forms_title">Sign Up</h2>
+        
+        
         <!--signup form -->
         <form class="fo	ms_form" action="signup" method="post">
           <fieldset class="forms_fieldset">
@@ -478,11 +472,7 @@ if(session.getAttribute("username") == null)
     </div>
   </div>
 </section>
-<%} 
-else{
-	response.sendRedirect("Dashboard");
-}
-%>
+   
 <script type="text/javascript">
 /**
  * Variables

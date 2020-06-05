@@ -30,6 +30,7 @@ public class Logout extends HttpServlet{
                 (new InsertRecord()).intoUserHistory(userId,"Successfully logged out of the system");
                 session.removeAttribute("username");
                 session.removeAttribute("userID");
+                session.removeAttribute("role");
                 response.sendRedirect("welcome.jsp");
             } catch (SQLException ex) {
                 Logger.getLogger(Logout.class.getName()).log(Level.SEVERE, null, ex);

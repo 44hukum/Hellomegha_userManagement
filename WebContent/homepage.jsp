@@ -9,7 +9,9 @@
 </head>
 <body>
 
-
+    <% if(session.getAttribute("username") !=null){
+            
+    %>
 <div class="area"></div>
 <nav class="main-menu">
             <ul>
@@ -92,6 +94,10 @@
        <jsp:include page="profilechoicesecond.jsp"></jsp:include>
       		
         </section>
-       
+    <%
+        }else{
+response.sendRedirect("welcome.jsp");
+}
+    %>   
 </body>
 </html>

@@ -24,8 +24,6 @@ public class Signup extends HttpServlet{
 	/**
 	 * 
 	 */
-	
-
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
                 //creates the session
                 HttpSession session=req.getSession();
@@ -48,14 +46,15 @@ public class Signup extends HttpServlet{
                         //getuser 
                           ResultSet userData=user.getUser(username);
                         //set history user creation time and user login time
-                        while(userData.next()){
-                     
+                        while(userData.next()){              
                         //create session
-                        session.setAttribute("username", username);
+                       
                         session.setAttribute("userID", userData.getInt("userID"));
-                           insertRecord.intoUserHistory(userData.getInt("userID"),"Account created");
+                        insertRecord.intoUserHistory(userData.getInt("userID"),"Account created");
                         } //session creation successfull and histiry creation to
-                        userData.close();
+                         userData.close();
+                         session.setAttribute("username", username);
+                         session.setAttribute("role", "user");
                         resp.sendRedirect("Dashboard");
                       } 
                     else{
@@ -70,7 +69,7 @@ public class Signup extends HttpServlet{
                     resp.sendRedirect("welcome.jsp");
                    }
                 }  catch (SQLException ex) {
-                Logger.getLogger(Signup.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Signup.class.getName()).log(Level.INFO, "Error", ex);
                   }         		
                   catch(Exception e) {
 			
