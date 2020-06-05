@@ -443,7 +443,7 @@ if(session.getAttribute("username") == null){
             </div>
           </fieldset>
           <div class="forms_buttons">          
-           <a href="login/resetpassword"><button type="button" class="forms_buttons-forgot">Forgot password?</button></a> 
+           <a href="resetPassword.jsp"><button type="button" class="forms_buttons-forgot">Forgot password?</button></a> 
             <input type="submit" value="Log In" class="forms_buttons-action">
           </div>
         </form>

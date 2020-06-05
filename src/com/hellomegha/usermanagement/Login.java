@@ -19,12 +19,19 @@ import java.util.logging.Logger;
 
 public class Login extends HttpServlet{
 	
+    
 	/**
-	 * 
-	 */
-	
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
 	 public void doPost(HttpServletRequest request,HttpServletResponse response)
          throws IOException, ServletException {
+             
+            
              HttpSession session=request.getSession();
              try(PrintWriter out=response.getWriter()){
                  //take the password and username
@@ -63,5 +70,7 @@ public class Login extends HttpServlet{
                  }catch(NullPointerException e){}
                  catch(Exception e){}
              }
-         }
+            }
+         
+       
 }
