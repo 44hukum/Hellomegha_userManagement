@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.hellomegha.usermanagement;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author wanu
  */
-public class ResetPassword extends HttpServlet {
+public class UriController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -25,18 +26,23 @@ public class ResetPassword extends HttpServlet {
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occu
+     * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+         HttpSession session=request.getSession();
         try (PrintWriter out = response.getWriter()) {
         
-             String  url[]=request.getRequestURI().split("/hellomegha/");
-            out.println(url[1]);
+             String  url[]=request.getRequestURI().split("/hellomegha/uri/");
+             String editUser=url[1];
+              System.out.println(editUser.getClass().getName());
+              request.setAttribute("editUser", editUser);
+              RequestDispatcher rd=request.getRequestDispatcher("Dashboard");
+              rd.forward(request,response);
+        }
          
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

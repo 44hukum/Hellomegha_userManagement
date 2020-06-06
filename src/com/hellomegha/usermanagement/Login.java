@@ -42,10 +42,12 @@ public class Login extends HttpServlet{
                      //1.
                      ResultSet isAdmin=(new FindUser()).getAdmin(username); //check and validate admin admin                    
                               while(isAdmin.next()){
-                              if(isAdmin.getString("password").toString().equals(password)){
+                              if(isAdmin.getString("password").equals(password)){
                                   session.setAttribute("username", username);
                                   session.setAttribute("role", "admin");
                                   session.setAttribute("userID",isAdmin.getInt("adminId"));
+                                    Integer adminId=(Integer) session.getAttribute("userID");
+              (new InsertRecord()).intoAdminHistory(adminId,"Successfully logged in to the system");
                                   response.sendRedirect("Dashboard");
                                   }              
                               }
@@ -58,6 +60,8 @@ public class Login extends HttpServlet{
                                session.setAttribute("username", username);
                                   session.setAttribute("role", "user");
                                   session.setAttribute("userID",isUser.getInt("userId"));
+                                    Integer userId=(Integer) session.getAttribute("userID");
+        (new InsertRecord()).intoUserHistory(userId,"Successfully logged in to the system");
                                   response.sendRedirect("Dashboard");
                               }
                             }               

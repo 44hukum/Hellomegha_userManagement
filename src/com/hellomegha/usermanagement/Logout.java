@@ -24,10 +24,20 @@ public class Logout extends HttpServlet{
 
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             try {
-                HttpSession session=request.getSession();
+                HttpSession session=request.getSession(); 
                 Integer userId=(Integer) session.getAttribute("userID");
-                //save history
+               //for user
+                if(session.getAttribute("role") =="user"){
                 (new InsertRecord()).intoUserHistory(userId,"Successfully logged out of the system");
+               
+                }
+                //for admin
+                if(session.getAttribute("role") =="admin"){
+                (new InsertRecord()).intoAdminHistory(userId,"Successfully logged out of the system");
+               
+                }
+                //save history
+                
                 session.removeAttribute("username");
                 session.removeAttribute("userID");
                 session.removeAttribute("role");

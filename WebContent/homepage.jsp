@@ -25,7 +25,7 @@
                   
                 </li>
                 <li class="has-subnav">
-                    <a href="profile.jsp">
+                    <a href="profilechoicesecond.jsp">
                         <i class="fa fa-user fa-2x"></i>
                         <span class="nav-text">
                             Profile
@@ -91,7 +91,7 @@
         </nav>
         <section>
   
-       <jsp:include page="profilechoicesecond.jsp"></jsp:include>
+       <jsp:include page="usertable.jsp"></jsp:include>
       		
         </section>
     <%

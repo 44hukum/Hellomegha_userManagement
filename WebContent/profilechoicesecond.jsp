@@ -1,11 +1,15 @@
+<%@page import="com.hellomegha.databasequeries.FindUser"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <link rel="stylesheet" type="text/css" href="./Resources/css/profilesecond.css">
 <link rel="stylesheet" type="text/css" href="./Resources/style.css">
 
+
 <section>
-  <% String description="I am a Worker here,";
-  	String username=(String)session.getAttribute("username");
+  <%
+      String username="";
+      ResultSet result=null;      
+      String description="I am a Worker here,";
   	String email="";
   	String phonenumber="";
   	String githublink="#";
@@ -13,18 +17,72 @@
   	String address="Nepal";
   	String firstname="";
   	String lastname="";
-  	/*  for all the dynamically changing user details */
-  	if(session.getAttribute("data") !=null) {
-			ResultSet result=(ResultSet) session.getAttribute("data");
-			try {
-				System.out.println("helsdsdo"+result.getString("username"));
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
+        
+        
+      if(request.getParameter("textVal") !=null){
+            username=request.getParameter("textVal"); //if admin tries to edit user
+            result=(new FindUser()).getUser(username);
+            try {
+            while(result.next()){
+                email=result.getString("email");
+                phonenumber=result.getString("phoneNumber");
+                if(result.getString("githublink") !=null) githublink = result.getString("githublink");
+                   if(result.getString("Address") !=null) address = result.getString("Address");
+                   if(result.getString("firstName") !=null)  firstname = result.getString("firstName");  
+                  if(result.getString("lastName") !=null)   lastname = result.getString("lastName");
+                  if(result.getString("About") !=null)  description = result.getString("About");
+                    session.setAttribute("changeU",result.getString("userID")); 
+                }
+              } catch (SQLException e) {
+		e.printStackTrace();
 			}
+      
+  }else{
+         username=(String)session.getAttribute("username");
+  }    
+  	/*  for all the dynamically changing user details */
+  	if(username!=null) {
+            
+            if(session.getAttribute("role").equals("admin")){
+                result=(new FindUser()).getAdmin(username);
+         
+	try {
+            while(result.next()){
+                email=result.getString("email");
+                phonenumber=result.getString("phoneNumber");
+                if(result.getString("githublink") !=null) githublink = result.getString("githublink");
+                   if(result.getString("Address") !=null) address = result.getString("Address");
+                   if(result.getString("firstName") !=null)  firstname = result.getString("firstName");  
+                  if(result.getString("lastName") !=null)   lastname = result.getString("lastName");
+                  if(result.getString("About") !=null)  description = result.getString("About");
+                  
+                }
+              } catch (SQLException e) {
+		e.printStackTrace();
+			}
+            }
+            else {
+		result=(new FindUser()).getUser(username);
+                 out.println(session.getAttribute("role"));
+			try {
+            while(result.next()){
+                email=result.getString("email");
+                phonenumber=result.getString("phoneNumber");
+                if(result.getString("githublink") !=null) githublink = result.getString("githublink");
+                   if(result.getString("Address") !=null) address = result.getString("Address");
+                   if(result.getString("firstName") !=null)  firstname = result.getString("firstName");  
+                  if(result.getString("lastName") !=null)   lastname = result.getString("lastName");
+                  if(result.getString("About") !=null)  description = result.getString("About");
+                  
+                }
+              } catch (SQLException e) {
+		e.printStackTrace();
+			}
+            }      
 		}
  		
       %>
+   
   <div class="wrapper">  
   <div class="profile-card js-profile-card">
     <div class="profile-card__img">
@@ -42,7 +100,7 @@
         </span>
 
         <span class="profile-card-loc__txt">
-     <%=address %>
+        <%=address %>
         </span>
       </div>
 <!-- 
@@ -100,22 +158,27 @@
         <button class="profile-card__button button--orange">Block Account</button>
       </div>
     </div>
-
+        <%if(githublink.equals("#")) githublink="";%>
     <div class="profile-card-message js-message" style="text-align: center;">
-    for user profile
-      <form class="profile-card-form" action="welcome.jsp">
-        <div class="profile-card-form__container">
-         <input type="text" name="username" placeholder="username" value="<%= username%>">
-          <input type="text" name="address" placeholder="address" value="<%= address%>">
-           <input type="text" name="email" placeholder="E-mail" value="<%=email%>">
-            <input type="text" name="githublink" placeholder="githublink" <%= githublink%>>
-             
-                     
-        </div>
-
-        <div class="profile-card-form__bottom">
-          <button class="profile-card__button button--blue" >
-            save
+        Update user
+        <form class="profile-card-form" action="updateAccount" method="post">
+            <div class="profile-card-form__container">
+                
+              <input type="text" name="firstname" placeholder="First Name" value="<%= firstname%>">
+                  <input type="text" name="lastname" placeholder="Last Name" value="<%= lastname%>">
+                  <input type="text" name="username" placeholder="username" value="<%= username%>">
+                  <input type="text" name="address" placeholder="address" value="<%= address%>">
+                    <input type="text" name="email" placeholder="E-mail" value="<%=email%>">
+                       <input type="text" name="phonenumber" placeholder="phonenumber" value="<%=phonenumber%>">
+                   <input type="text" name="githublink" placeholder="githublink" value="<%= githublink%>">
+                   <textarea type="text" name="description" placeholder="About">
+                   <%= description%>
+                   </textarea>
+                                  
+            </div>
+            <div class="profile-card-form__bottom">
+              <button class="profile-card__button button--blue" >
+                save
           </button>
 
          	 <button class="profile-card__button button--gray js-message-close">

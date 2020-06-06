@@ -297,7 +297,7 @@ input::placeholder {
   margin-top: 35px;
 }
 .user_options-forms .forms_buttons-forgot {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Helvetica", sans-serif;
   letter-spacing: 0.1rem;
   color: #ccc;
   text-decoration: underline;

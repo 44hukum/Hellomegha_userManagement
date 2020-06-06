@@ -64,10 +64,10 @@ public class FindUser implements UserRecord{
 		return connection.makeConnection().prepareStatement("select * from userHistory;").executeQuery();
 	}
 
-	public ResultSet userHistory(String username) throws SQLException {	 	//user History of a certain user
+	public ResultSet userHistory(int userID) throws SQLException {	 	//user History of a certain user
 		PreparedStatement statement=connection.makeConnection().prepareStatement("select * from userHistory where "
-				+ "username=?");
-		statement.setString(1, username);
+				+ "userID=?");
+		statement.setInt(1, userID);
 		return statement.executeQuery();
 		
 	}
