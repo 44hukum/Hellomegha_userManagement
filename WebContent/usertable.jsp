@@ -64,10 +64,11 @@ margin-top: 41px;
 			<th data-field="name" data-filter-control="input" data-sortable="true">username</th>
 			<th data-field="date" data-filter-control="select" data-sortable="true">E-mail</th>
 			<th data-field="status" data-filter-control="select" data-sortable="false">Status</th>
-		
+                     
 			<% if(session.getAttribute("role").equals("admin")){%>
                         <th data-field="profile" data-sortable="false">Show Profile</th>
                         <%}%>
+                           <th data-field="status" data-filter-control="select" data-sortable="false">Delete user</th>
 		</tr>
 	</thead>
 	
