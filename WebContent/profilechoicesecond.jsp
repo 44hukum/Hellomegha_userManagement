@@ -20,7 +20,7 @@
   	String lastname="";
         String password="";
         int uid=0;
-        
+        String status="";
       if(request.getParameter("textVal") !=null){
             username=request.getParameter("textVal"); //if admin tries to edit user
             result=(new FindUser()).getUser(username);
@@ -35,6 +35,7 @@
                   if(result.getString("About") !=null)  description = result.getString("About");
                     session.setAttribute("changeU",result.getString("userID")); 
                   uid=result.getInt("userID");
+                  status=result.getString("Status");
                 }
            %>
             <h3>History</h3>
@@ -258,9 +259,18 @@ margin-left: 300px;">
       <div class="profile-card-ctr">
         <button class="profile-card__button button--blue js-message-btn">Edit</button>
         
-        <% if(request.getParameter("textVal") !=null){%>
-             <button class="profile-card__button button--orange">Block Account</button>
-        <%} %>
+        <% if(request.getParameter("textVal") !=null){
+        if(status.equals("Active")){
+        %>
+                <!--block user-->
+        <button class="profile-card__button button--orange" onclick=blockUser("<%=uid%>")>Block Account</button>
+        <%} else{
+                %>
+                <!--un blockuser-->
+                <button class="profile-card__button button--orange" onclick="unBlock('<%=uid%>')">Unblock Account</button>
+                    <%
+                        }
+        }%>
       </div>
     </div>
         <%if(githublink.equals("#")) githublink="";%>
@@ -347,8 +357,32 @@ margin-left: 300px;">
 </svg>
 
 </section>
-
+  <!--user block form-->
+                    <form action="BlockUser" method="post"style="display:none;" id="blockD">
+                        <input type="text" id="blockUser" value="" name="blockUser">
+                        <input type="submit" id="submitB">
+                    </form> 
+  <!--user unblock form-->
+                    <form action="BlockUser" method="post" style="display:none;" id="blockD">
+                        <input type="text" id="unblockUser" value="" name="unblockUser">
+                        <input type="submit" id="submitA">
+                    </form> 
 <script type="text/javascript">
+    //block user
+    
+    function blockUser(userID){
+        document.getElementById("blockUser").setAttribute('value',userID);
+        document.getElementById("submitB").click();
+        
+    }
+    //unblock user
+       
+    function unBlock(userID){
+        document.getElementById("unblockUser").setAttribute('value',userID);
+         document.getElementById("submitA").click();
+       
+    }
+    
 var messageBox = document.querySelector('.js-message');
 var btn = document.querySelector('.js-message-btn');
 var card = document.querySelector('.js-profile-card');
