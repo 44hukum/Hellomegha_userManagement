@@ -403,6 +403,17 @@ input::placeholder {
 
 <body>
 <%
+     if(session.getAttribute("error") !=null){
+          String error=(String)session.getAttribute("error");
+         
+     %>
+     <h3>
+         <%=error%>
+     </h3>
+    <%
+        session.removeAttribute("error");
+         }
+
 if(session.getAttribute("username") == null){
 %>
  
@@ -424,13 +435,16 @@ if(session.getAttribute("username") == null){
     
     <div class="user_options-forms" id="user_options-forms">
       <div class="user_forms-login">
+          <h2 class="forms_title">Login</h2>
           <%String loginError="";
           if(session.getAttribute("loginError") !=null){
           loginError=(String)session.getAttribute("loginError");
-          }
+          
           %>
-          <h2 class="forms_title">Login</h2> <span><%= loginError%></span>
-        <% session.removeAttribute("loginError");%>
+           <span><%= loginError%></span>
+        <% session.removeAttribute("loginError");
+            }
+        %>
         
         <!--login form-->
         <form class="forms_form" action="login" method="post">

@@ -13,4 +13,5 @@ public interface UserRecord {
 	public ResultSet getAdmin(String username) throws SQLException; //extracts the admin details
 	public ResultSet adminTableRecord() throws SQLException; //returns the admin list
 	public ResultSet userTableRecord() throws SQLException ; //returns the users list
+        public ResultSet adminHistory(int userID) throws SQLException;//returns the admin History
 }

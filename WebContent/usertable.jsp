@@ -67,8 +67,9 @@ margin-top: 41px;
                      
 			<% if(session.getAttribute("role").equals("admin")){%>
                         <th data-field="profile" data-sortable="false">Show Profile</th>
+                         <th data-field="status" data-filter-control="select" data-sortable="false">Delete user</th>
                         <%}%>
-                           <th data-field="status" data-filter-control="select" data-sortable="false">Delete user</th>
+                          
 		</tr>
 	</thead>
 	
@@ -91,9 +92,9 @@ margin-top: 41px;
 			
                         <% if(session.getAttribute("role").equals("admin")){
                        
-                        %>
-                        
+                        %>                        
                         <td><a href="#" onclick=a("<%=users.getString("username")%>")>view profile</a></td>
+                           <td><a href="#" onclick=deleteUser("<%=users.getInt("userId")%>")>Delete User</a></td>
 			<%}%>
 		</tr> 
                
@@ -110,20 +111,34 @@ margin-top: 41px;
 	</tbody>
 	
 </table>
+                    <!--user selecttion form-->
                     <form action="profilechoicesecond.jsp" style="display:none;" id="userD">
                         <input type="text" id="textWriter" value="" name="textVal">
                         <input type="submit" id="submitButton">
                     </form>        
+                    
+                    <!--user deletion form-->
+                    <form action="DeleteUser" method="post"style="display:none;" id="deleteD">
+                        <input type="text" id="deleteUser" value="" name="deleteUser">
+                        <input type="submit" id="submit">
+                    </form> 
 </div>
 </div>
  
  
 <script type="text/javascript">
  var i=document.getElementById("textWriter");
- function a(value){
- i.setAttribute('value',value);
- document.getElementById("submitButton").click();
- }
+         function a(userID){
+            i.setAttribute('value',userID);
+            document.getElementById("submitButton").click();
+         }
+    //delete user
+  var user=document.getElementById("deleteUser");
+  function deleteUser(userID){
+      user.setAttribute('value',userID);
+      document.getElementById("submit").click();
+      
+  }
 </script>
 
 

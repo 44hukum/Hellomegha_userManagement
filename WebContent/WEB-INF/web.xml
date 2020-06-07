@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app id="WebApp_ID" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-
->
+<web-app id="WebApp_ID" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <display-name>HelloMegha</display-name>
     <!-- first class which is responsible for user redirection and input verification-->
     <servlet>
@@ -11,8 +7,8 @@
         <servlet-class>com.hellomegha.usermanagement.Signup</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UriController</servlet-name>
-        <servlet-class>UriController</servlet-class>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>com.hellomegha.usermanagement.DeleteUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
@@ -38,21 +34,19 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <!-- dashboard-->
-  <servlet>
+    <servlet>
         <servlet-name>dashboard</servlet-name>
         <servlet-class>com.hellomegha.usermanagement.Dashboard</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
-    </servlet-mapping> 
-    
+    </servlet-mapping>
     <!--to update Account-->
     <servlet-mapping>
         <servlet-name>dashboard</servlet-name>
         <url-pattern>/updateAccount</url-pattern>
     </servlet-mapping>
-    
     <!-- reset password-->
     <servlet>
         <servlet-name>ResetPassword</servlet-name>
@@ -62,11 +56,9 @@
         <servlet-name>ResetPassword</servlet-name>
         <url-pattern>/ResetPassword</url-pattern>
     </servlet-mapping>
-    
-    <!-- profile updater -->
     <servlet-mapping>
-        <servlet-name>UriController</servlet-name>
-        <url-pattern>/uri/*</url-pattern>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/DeleteUser</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>

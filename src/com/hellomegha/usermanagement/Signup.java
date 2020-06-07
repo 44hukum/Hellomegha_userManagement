@@ -51,6 +51,8 @@ public class Signup extends HttpServlet{
                        
                         session.setAttribute("userID", userData.getInt("userID"));
                         insertRecord.intoUserHistory(userData.getInt("userID"),"Account created");
+                          insertRecord.intoUserHistory(userData.getInt("userID"),"logged in ");
+                        
                         } //session creation successfull and histiry creation to
                          userData.close();
                          session.setAttribute("username", username);

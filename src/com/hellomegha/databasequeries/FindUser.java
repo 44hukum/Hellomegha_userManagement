@@ -90,8 +90,12 @@ public class FindUser implements UserRecord{
 	/*
 	 * returns the admin history
 	 * */
-	public static void main(String[] args) throws SQLException {
-		FindUser obj=new FindUser();
-		System.out.println(obj.getUser("hukum"));
+	public ResultSet adminHistory(int userID) throws SQLException {	 	//user History of a certain user
+		PreparedStatement statement=connection.makeConnection().prepareStatement("select * from adminHistory where "
+				+ "adminID=?");
+		statement.setInt(1, userID);
+		return statement.executeQuery();
+		
 	}
+	
 }

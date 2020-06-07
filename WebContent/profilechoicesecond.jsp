@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="./Resources/css/profilesecond.css">
 <link rel="stylesheet" type="text/css" href="./Resources/style.css">
 
-
+ <a href="Dashboard">Go Back</a> 
 <section>
   <%
       int frequency=0;
@@ -37,9 +37,9 @@
                   uid=result.getInt("userID");
                 }
            %>
-                <div class="userHistory">
-                <h3>History</h3>
+            <h3>History</h3>
                 <h4>User ID: <%=uid%></h4>
+                <div class="userHistory">               
                 <table>
                     <thead>
                         <tr>
@@ -48,7 +48,7 @@
                             <th>Date</th>
                         </tr>
                     </thead> 
-                    <tbody>
+                    <tbody class="bodyHistory">
                        <% ResultSet uHistory=(new FindUser()).userHistory(uid);
                        while(uHistory.next()){
                        %>
@@ -77,10 +77,10 @@
   	/*  for all the dynamically changing user details */
   	if(username!=null) {
             
-            if(session.getAttribute("role").equals("admin")){
+            if(session.getAttribute("role").equals("admin")){ //for admin details
                 result=(new FindUser()).getAdmin(username);
          
-	try {
+                    try {
             while(result.next()){
                 email=result.getString("email");
                 phonenumber=result.getString("phoneNumber");
@@ -90,18 +90,50 @@
                   if(result.getString("lastName") !=null)   lastname = result.getString("lastName");
                   if(result.getString("About") !=null)  description = result.getString("About");
                   password=result.getString("password");
+                  uid=result.getInt("adminID");
                 }
-                         frequency=10;
+                    //starts of admin histroy
+
+                %>
+                 <h3>History</h3>
+                <h4>User ID: <%=uid%></h4>
+                <div class="userHistory">
+               
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity</th>                                
+                            <th>Time</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead> 
+                    <tbody class="bodyHistory">
+                       <% ResultSet uHistory=(new FindUser()).adminHistory(uid);
+                       while(uHistory.next()){
+                       %>
+                        <tr>
+                            <td><%=uHistory.getString("Activity_log")%></td>
+                            <td><%=uHistory.getTime("Time")%></td>
+                            <td><%=uHistory.getDate("Date")%></td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+                
+            </div>
+                    <a href="Dashboard">Delete Account</a>
+              <%
+                    //end of admin history
               } catch (SQLException e) {
 		e.printStackTrace();
 			}
-            }
-            else {
+            }//end of admin details
+            else {//for user details
 		result=(new FindUser()).getUser(username);
                  out.println(session.getAttribute("role"));
                   frequency=10;
-			try {
-            while(result.next()){
+	try {
+              while(result.next()){
                 email=result.getString("email");
                 phonenumber=result.getString("phoneNumber");
                 if(result.getString("githublink") !=null) githublink = result.getString("githublink");
@@ -110,17 +142,50 @@
                   if(result.getString("lastName") !=null)   lastname = result.getString("lastName");
                   if(result.getString("About") !=null)  description = result.getString("About");
                    password=result.getString("password");
-                }
-            
-              } catch (SQLException e) {
-		e.printStackTrace();
-			}
-            }      
-		}
-      }	
+                    uid=result.getInt("userID");
+                    }
+                //userHistory
+                           %>
+                           <h3>History</h3>
+                <h4>User ID: <%=uid%></h4>
+                <div class="userHistory">
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity</th>                                
+                            <th>Time</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead> 
+                  <tbody class="bodyHistory">
+                       <% ResultSet uHistory=(new FindUser()).userHistory(uid);
+                       while(uHistory.next()){
+                       %>
+                        <tr>
+                            <td><%=uHistory.getString("Activity_log")%></td>
+                            <td><%=uHistory.getTime("Time")%></td>
+                            <td><%=uHistory.getDate("Date")%></td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+                
+            </div>
+                    <!--for own account deltetion-->
+                         <a href="Dashboard">Delete Account</a> 
+              <%
+                    
+                //end of user history
+              } catch (SQLException e) {e.printStackTrace();}
+            }  //end of user Details    
+    }//end of if statement
+          }	//end of main if statement
       %>
    
-  <div class="wrapper">  
+      <div class="wrapper" style="margin-top: -370px;
+     
+margin-left: 300px;">  
   <div class="profile-card js-profile-card">
     <div class="profile-card__img">
     <!-- blob should be managed properly -->
@@ -192,7 +257,10 @@
 
       <div class="profile-card-ctr">
         <button class="profile-card__button button--blue js-message-btn">Edit</button>
-        <button class="profile-card__button button--orange">Block Account</button>
+        
+        <% if(request.getParameter("textVal") !=null){%>
+             <button class="profile-card__button button--orange">Block Account</button>
+        <%} %>
       </div>
     </div>
         <%if(githublink.equals("#")) githublink="";%>
