@@ -13,12 +13,14 @@
       String description="I am a Worker here,";
   	String email="";
   	String phonenumber="";
-  	String githublink="#";  	
+  	String githublink="#";
+  	
   	String address="Nepal";
   	String firstname="";
   	String lastname="";
         String password="";
         int uid=0;
+        
       if(request.getParameter("textVal") !=null){
             username=request.getParameter("textVal"); //if admin tries to edit user
             result=(new FindUser()).getUser(username);
@@ -32,15 +34,10 @@
                   if(result.getString("lastName") !=null)   lastname = result.getString("lastName");
                   if(result.getString("About") !=null)  description = result.getString("About");
                     session.setAttribute("changeU",result.getString("userID")); 
-                    uid=result.getInt("userID");
+                  uid=result.getInt("userID");
                 }
-              } catch (SQLException e) {
-		e.printStackTrace();
-			}
-      //for userHistory table
-            %>
-            
-            <div class="userHistory">
+           %>
+                <div class="userHistory">
                 <h3>History</h3>
                 <h4>User ID: <%=uid%></h4>
                 <table>
@@ -68,9 +65,15 @@
     
               <% //end of user History
             
+            
+              } catch (SQLException e) {
+		e.printStackTrace();
+			}
+      
+        
             }else{
                    username=(String)session.getAttribute("username");
-            }
+            
   	/*  for all the dynamically changing user details */
   	if(username!=null) {
             
@@ -88,7 +91,7 @@
                   if(result.getString("About") !=null)  description = result.getString("About");
                   password=result.getString("password");
                 }
-                        
+                         frequency=10;
               } catch (SQLException e) {
 		e.printStackTrace();
 			}
@@ -96,7 +99,7 @@
             else {
 		result=(new FindUser()).getUser(username);
                  out.println(session.getAttribute("role"));
-              
+                  frequency=10;
 			try {
             while(result.next()){
                 email=result.getString("email");
@@ -114,11 +117,10 @@
 			}
             }      
 		}
-	
+      }	
       %>
    
-      <div class="wrapper" style="margin-top: -300px;
-padding-left: 217px;">  
+  <div class="wrapper">  
   <div class="profile-card js-profile-card">
     <div class="profile-card__img">
     <!-- blob should be managed properly -->
@@ -209,7 +211,7 @@ padding-left: 217px;">
                            %>
                          <input type="text" name="password" placeholder="passowrd" value="<%=password%>">
                        <%
-                          
+                           frequency=0;
                        }%>
                    <input type="text" name="githublink" placeholder="githublink" value="<%= githublink%>">
                    <textarea type="text" name="description" placeholder="About">
