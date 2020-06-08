@@ -78,6 +78,7 @@ public class InsertRecord implements RecordInsertition{
 	public boolean intoUserRegistration(String username,String password, String email, String phonenumber) throws SQLException {
 		String sql="insert into userRegistration(username,password,email,phoneNumber) values(?,?,?,?)";
 		
+                
 		Connection con=connection.makeConnection();		
 		PreparedStatement statement=con.prepareStatement(sql);
 		statement.setString(1, username);

@@ -1,4 +1,4 @@
-<%@page import="com.hellomegha.databasequeries.FindUser"%>
+<%@page import="com.hellomegha.databasequeries.FindUser" pageEncoding="UTF-8"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <link rel="stylesheet" type="text/css" href="./Resources/css/profilesecond.css">
