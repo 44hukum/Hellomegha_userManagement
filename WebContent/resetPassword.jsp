@@ -111,14 +111,24 @@
 
     <!--Register-->
     <div class="signup-form">
-        <form action="login/forgetpassword" method="post">
+        <% String error="";
+        if(session.getAttribute("ER") !=null)
+            error=(String)session.getAttribute("ER");
+        
+        %>
+        
+        <form action="ResetPassword" method="post">
             <h2>Account</h2>
             <p class="hint-text">Please Enter your username,phone number and new password</p>
+            <h3 style="color:red;">
+            <%=error%> 
+    
+        </h3>
             <div class="form-group">
                 <input type="text" class="form-control" name="username" placeholder="Username" required="required">      	
             </div>
             <div class="form-group">
-                <input type="email" class="form-control" name="email" placeholder="Email" required="required">
+                <input type="text" class="form-control" name="phonenumber" placeholder="Phone Number" required="required">
             </div>
             <div class="form-group">
                 <!-- use java script to check both the password chosen  are same-->
@@ -132,7 +142,7 @@
                 <button type="submit" class="btn btn-success btn-lg btn-block">Reset</button>
             </div>
         </form>
-      
+      <%session.removeAttribute("ER");%>
     </div>
 </body>
 </html>

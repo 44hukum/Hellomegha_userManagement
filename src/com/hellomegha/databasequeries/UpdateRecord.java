@@ -121,4 +121,22 @@ public class UpdateRecord {
             
         return false;
     }
+    
+    public boolean updatePassword(int userID,String password){
+             String sql="update userRegistration set password=? where userID=?";
+            Connection con=connect.makeConnection();
+        try {
+            PreparedStatement statement=con.prepareStatement(sql);
+            statement.setString(1, password);
+            statement.setInt(2, userID);
+            if(!statement.execute())return true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch(Exception e){
+        e.printStackTrace();
+        }
+    return false;
+    }
 }

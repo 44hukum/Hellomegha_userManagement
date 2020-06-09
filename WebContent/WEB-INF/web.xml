@@ -54,7 +54,7 @@
     <!-- reset password-->
     <servlet>
         <servlet-name>ResetPassword</servlet-name>
-        <servlet-class>com.hellomegha.usermanagement.ResetPassword</servlet-class>
+        <servlet-class>com.hellomegha.databasequeries.ResetPassword</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ResetPassword</servlet-name>
@@ -68,6 +68,26 @@
         <servlet-name>BlockUser</servlet-name>
         <url-pattern>/BlockUser</url-pattern>
     </servlet-mapping>
+    <!--jsp mapping-->
+    <!-- usertable -->
+    <servlet>
+        <servlet-name>user-info-table</servlet-name>
+        <jsp-file>/usertable.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>user-info-table</servlet-name>
+        <url-pattern>/user-info</url-pattern>
+    </servlet-mapping>
+    <!-- usertable -->
+    <servlet>
+        <servlet-name>profile</servlet-name>
+        <jsp-file>/profilechoicesecond.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <!--to update Account-->
     <welcome-file-list>
         <welcome-file>
             welcome.jsp

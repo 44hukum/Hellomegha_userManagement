@@ -105,7 +105,7 @@ public class InsertRecord implements RecordInsertition{
 
 	@Override
 	public boolean intoAdmin(String username, String email, String phonenumber) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 	

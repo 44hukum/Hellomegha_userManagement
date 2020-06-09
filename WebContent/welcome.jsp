@@ -9,399 +9,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Hello Megha</title>
+	<!--important meta tags-->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, inital-scale=1">
+
+	<!--Title-->
+	<title>SAD Usermanagement</title>
+
+	<!--Icon-->
+	<link rel="shortcut icon" href="img/logo/logo.png">
+
+	<!--Google Fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+
+	<!--Font awesome-->
+	<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css">
+
+	<!--Bootstrap CSS-->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css">
+
+	<!--Owl carousel CSS-->
+	<link rel="stylesheet" type="text/css" href="css/owl-carousel/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="css/owl-carousel/owl.carousel.min.css">
+	<link rel="stylesheet" type="text/css" href="css/owl-carousel/owl.theme.default.min.css">
+
+	<!--responsive tabs-->
+	<link rel="stylesheet" type="text/css" href="css/responsive-tabs/responsive-tabs.css">
+
+	<!--magnific popup-->
+	<link rel="stylesheet" type="text/css" href="css/magnific-popup/magnific-popup.css">
+
+	<!--Custom CSS-->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/user.css">
 </head>
-
-<style>
-/**
- * General variables
- */
-/**
- * General configs
- */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Montserrat", sans-serif;
-  font-size: 12px;
-  line-height: 1em;
-}
-
-button {
-  background-color: transparent;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-}
-
-input {
-  background-color: transparent;
-  padding: 0;
-  border: 0;
-  outline: 0;
-}
-input[type="submit"] {
-  cursor: pointer;
-}
-input::-webkit-input-placeholder {
-  font-size: 0.85rem;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  letter-spacing: 0.1rem;
-  color: #ccc;
-}
-input::-moz-placeholder {
-  font-size: 0.85rem;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  letter-spacing: 0.1rem;
-  color: #ccc;
-}
-input:-ms-input-placeholder {
-  font-size: 0.85rem;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  letter-spacing: 0.1rem;
-  color: #ccc;
-}
-input::-ms-input-placeholder {
-  font-size: 0.85rem;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  letter-spacing: 0.1rem;
-  color: #ccc;
-}
-input::placeholder {
-  font-size: 0.85rem;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  letter-spacing: 0.1rem;
-  color: #ccc;
-}
-
-/**
- * Bounce to the left side
- */
-@-webkit-keyframes bounceLeft {
-  0% {
-    -webkit-transform: translate3d(100%, -50%, 0);
-            transform: translate3d(100%, -50%, 0);
-  }
-  50% {
-    -webkit-transform: translate3d(-30px, -50%, 0);
-            transform: translate3d(-30px, -50%, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, -50%, 0);
-            transform: translate3d(0, -50%, 0);
-  }
-}
-@keyframes bounceLeft {
-  0% {
-    -webkit-transform: translate3d(100%, -50%, 0);
-            transform: translate3d(100%, -50%, 0);
-  }
-  50% {
-    -webkit-transform: translate3d(-30px, -50%, 0);
-            transform: translate3d(-30px, -50%, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, -50%, 0);
-            transform: translate3d(0, -50%, 0);
-  }
-}
-/**
- * Bounce to the left side
- */
-@-webkit-keyframes bounceRight {
-  0% {
-    -webkit-transform: translate3d(0, -50%, 0);
-            transform: translate3d(0, -50%, 0);
-  }
-  50% {
-    -webkit-transform: translate3d(calc(100% + 30px), -50%, 0);
-            transform: translate3d(calc(100% + 30px), -50%, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(100%, -50%, 0);
-            transform: translate3d(100%, -50%, 0);
-  }
-}
-@keyframes bounceRight {
-  0% {
-    -webkit-transform: translate3d(0, -50%, 0);
-            transform: translate3d(0, -50%, 0);
-  }
-  50% {
-    -webkit-transform: translate3d(calc(100% + 30px), -50%, 0);
-            transform: translate3d(calc(100% + 30px), -50%, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(100%, -50%, 0);
-            transform: translate3d(100%, -50%, 0);
-  }
-}
-/**
- * Show Sign Up form
- */
-@-webkit-keyframes showSignUp {
-  100% {
-    opacity: 1;
-    visibility: visible;
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes showSignUp {
-  100% {
-    opacity: 1;
-    visibility: visible;
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-}
-/**
- * Page background
- */
-.user {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-          align-items: center;
-  width: 100%;
-  height: 100vh;
- 
-  background-size: cover;
-}
-.user_options-container {
-  position: relative;
-  width: 80%;
-}
-.user_options-text {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  width: 100%;
-  background-color: rgba(34, 34, 34, 0.85);
-  border-radius: 3px;
-}
-
-/**
- * Registered and Unregistered user box and text
- */
-.user_options-registered,
-.user_options-unregistered {
-  width: 50%;
-  padding: 75px 45px;
-  color: #fff;
-  font-weight: 300;
-}
-
-.user_registered-title,
-.user_unregistered-title {
-  margin-bottom: 15px;
-  font-size: 1.66rem;
-  line-height: 1em;
-}
-
-.user_unregistered-text,
-.user_registered-text {
-  font-size: 0.83rem;
-  line-height: 1.4em;
-}
-
-.user_registered-login,
-.user_unregistered-signup {
-  margin-top: 30px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  padding: 10px 30px;
-  color: #fff;
-  text-transform: uppercase;
-  line-height: 1em;
-  letter-spacing: 0.2rem;
-  -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-.user_registered-login:hover,
-.user_unregistered-signup:hover {
-  color: rgba(34, 34, 34, 0.85);
-  background-color: #ccc;
-}
-
-/**
- * Login and signup forms
- */
-.user_options-forms {
-  position: absolute;
-  top: 50%;
-  left: 30px;
-  width: calc(50% - 30px);
-  min-height: 420px;
-  background-color: #fff;
-  border-radius: 3px;
-  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-  -webkit-transform: translate3d(100%, -50%, 0);
-          transform: translate3d(100%, -50%, 0);
-  -webkit-transition: -webkit-transform 0.4s ease-in-out;
-  transition: -webkit-transform 0.4s ease-in-out;
-  transition: transform 0.4s ease-in-out;
-  transition: transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
-}
-.user_options-forms .user_forms-login {
-  -webkit-transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-}
-.user_options-forms .forms_title {
-  margin-bottom: 45px;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1em;
-  text-transform: uppercase;
-  color: #e8716d;
-  letter-spacing: 0.1rem;
-}
-.user_options-forms .forms_field:not(:last-of-type) {
-  margin-bottom: 20px;
-}
-.user_options-forms .forms_field-input {
-  width: 100%;
-  border-bottom: 1px solid #ccc;
-  padding: 6px 20px 6px 6px;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-  color: gray;
-  letter-spacing: 0.1rem;
-  -webkit-transition: border-color 0.2s ease-in-out;
-  transition: border-color 0.2s ease-in-out;
-}
-.user_options-forms .forms_field-input:focus {
-  border-color: gray;
-}
-.user_options-forms .forms_buttons {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-          align-items: center;
-  margin-top: 35px;
-}
-.user_options-forms .forms_buttons-forgot {
-  font-family: "Helvetica", sans-serif;
-  letter-spacing: 0.1rem;
-  color: #ccc;
-  text-decoration: underline;
-  -webkit-transition: color 0.2s ease-in-out;
-  transition: color 0.2s ease-in-out;
-}
-.user_options-forms .forms_buttons-forgot:hover {
-  color: #b3b3b3;
-}
-.user_options-forms .forms_buttons-action {
-  background-color: #e8716d;
-  border-radius: 3px;
-  padding: 10px 35px;
-  font-size: 1rem;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  -webkit-transition: background-color 0.2s ease-in-out;
-  transition: background-color 0.2s ease-in-out;
-}
-.user_options-forms .forms_buttons-action:hover {
-  background-color: #e14641;
-}
-.user_options-forms .user_forms-signup,
-.user_options-forms .user_forms-login {
-  position: absolute;
-  top: 70px;
-  left: 40px;
-  width: calc(100% - 80px);
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, -webkit-transform 0.5s ease-in-out;
-  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, -webkit-transform 0.5s ease-in-out;
-  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.5s ease-in-out;
-  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
-}
-.user_options-forms .user_forms-signup {
-  -webkit-transform: translate3d(120px, 0, 0);
-          transform: translate3d(120px, 0, 0);
-}
-.user_options-forms .user_forms-signup .forms_buttons {
-  -webkit-box-pack: end;
-          justify-content: flex-end;
-}
-.user_options-forms .user_forms-login {
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
-  opacity: 1;
-  visibility: visible;
-}
-
-/**
- * Triggers
- */
-.user_options-forms.bounceLeft {
-  -webkit-animation: bounceLeft 1s forwards;
-          animation: bounceLeft 1s forwards;
-}
-.user_options-forms.bounceLeft .user_forms-signup {
-  -webkit-animation: showSignUp 1s forwards;
-          animation: showSignUp 1s forwards;
-}
-.user_options-forms.bounceLeft .user_forms-login {
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transform: translate3d(-120px, 0, 0);
-          transform: translate3d(-120px, 0, 0);
-}
-.user_options-forms.bounceRight {
-  -webkit-animation: bounceRight 1s forwards;
-          animation: bounceRight 1s forwards;
-}
-
-/**
- * Responsive 990px
- */
-@media screen and (max-width: 990px) {
-  .user_options-forms {
-    min-height: 350px;
-  }
-  .user_options-forms .forms_buttons {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-            flex-direction: column;
-  }
-  .user_options-forms .user_forms-login .forms_buttons-action {
-    margin-top: 30px;
-  }
-  .user_options-forms .user_forms-signup,
-  .user_options-forms .user_forms-login {
-    top: 40px;
-  }
-
-  .user_options-registered,
-  .user_options-unregistered {
-    padding: 50px 45px;
-  }
-}
-
-</style>
-
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="65">
 <%
      if(session.getAttribute("error") !=null){
           String error=(String)session.getAttribute("error");
@@ -417,6 +61,256 @@ input::placeholder {
 if(session.getAttribute("username") == null){
 %>
  
+<!--code by ishan-->
+
+	<!--Preloader-->
+	<div id="preloader">
+		<div id="status">
+			&nbsp;
+		</div>
+	</div>
+
+	<!--Header-->
+	<header>
+		<nav class="navbar navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="site-nav-wrapper">
+					<div class="navbar-header">
+
+						<!--Logo
+						<a href="#home" class="navbar-brand smooth-scroll">
+							<img src="img/logo/logo.png" alt="Logo">
+						</a>-->
+					</div>
+
+					<!--Main menu-->
+					<div class="container">
+						<div class="collapse navbar-collapse"> 
+							<ul class="nav navbar-nav pull-right">
+								<li><a class="smooth-scroll" href="#home">Home</a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#about">About</a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#team">Team</a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#"></a></li>
+								<li><a class="smooth-scroll" href="#user_options-forms">Login</a></li>
+								<li><a class="smooth-scroll" href="#user">Signup</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!--Header ends-->
+
+	<!--Home-->
+	<section id="home">
+		<!--background image-->
+		
+		<img src="img/background/bg1.jpg" id="home-bg-image">
+
+		<!--Overlay-->
+		<div id="home-overlay"></div>
+
+		<!--Home Content-->
+		<div id="home-content">
+			<div id="home-content-inner" class="text-center">
+				<div id="home-heading">
+					<h1 id="home-heading-1"><span>User</span> Management</h1><br>
+					<h1 id="home-content-2">App For <span>Use</span></h1>
+				</div>
+				
+				<div id="home-btn">
+					<a class="btn btn-general btn-home smooth-scroll" href="#about" title="Start Now" role="button">Start Now</a>
+				</div>
+			</div>
+		</div>
+
+		<!--Arrow down-->
+		<a href="#about" id="arrow-down" class="smooth-scroll">
+			<i class="fa fa-angle-down"></i>
+		</a>
+	</section>
+	<!--Home ends-->
+
+	<!--About-->
+	<section id="about">
+		<div id="about-01">
+			<div class="content-box-lg">
+				<div class="container">
+					<div class="row">
+
+						<!--About Left side-->
+						<div class="col-md-6">
+							<div id="about-left">
+								<div class="vertical-heading">
+									<h5>Who We Are</h5>
+									<h2>A <strong>Story</strong> <br> About Us</h2>
+								</div>
+							</div>
+						</div>
+
+						<!--About Right side-->
+						<div class="col-md-6">
+							<div id="about-right">
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+								consequat. Duis aute irure dolor in reprehen
+								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>	
+	</section>
+	<!--About ends-->
+
+	<!--Statement-->
+	<section id="statement">
+		<div class="content-box-lg">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="tech-statement" class="text-center">
+							<h3> <i class="fa fa-quote-left"></i> User Management describes the ability for administrators, <br>to manage user access to various IT resources. <i class="fa fa-quote-right"></i></h3>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--Statement ends-->
+
+	<!--Team-->
+	<section id="team">
+		<div class="content-box-lg">
+			<div class="container">
+				<!--Team members-->
+				<div class="row">
+					<!--Team left side-->
+					<div class="col-md-6">
+						<div id="team-left">
+							<div class="vertical-heading">
+									<h5>Who We Are</h5>
+									<h2>Meet Our <br><strong>Talented</strong> Team </h2>
+								</div>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+								qmollit anim id est laborum.</p>
+							
+						</div>
+					</div>
+
+					<!--Team right side-->
+					<div class="col-md-6">
+						<div id="team-members" class="owl-carousel owl-theme">
+
+							<!--Member 01-->
+							<div class="team-member">
+								<img src="img/team/Ishan.jpg" alt="team member" class="img-responsive">
+								<div class="team-member-overlay">
+									<div class="team-member-info text-center">
+										<h6>Ishan Stha</h6>
+										<p> Web Designer</p>
+										<ul class="social-list">
+											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+											<li><a href="#"><i class="fa fa-google-plus"></i></a></li>	
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<!--Member 02-->
+							<div class="team-member">
+								<img src="img/team/Hukum.jpg" alt="team member" class="img-responsive">
+								<div class="team-member-overlay">
+									<div class="team-member-info text-center">
+										<h6>Hukum Gosain</h6>
+										<p> Web Developer</p>
+										<ul class="social-list">
+											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+											<li><a href="#"><i class="fa fa-google-plus"></i></a></li>	
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<!--Member 03-->
+							<div class="team-member">
+								<img src="img/team/team-3.jpg" alt="team member" class="img-responsive">
+								<div class="team-member-overlay">
+									<div class="team-member-info text-center">
+										<h6>Megha Magar</h6>
+										<p> Project Manager</p>
+										<ul class="social-list">
+											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+											<li><a href="#"><i class="fa fa-google-plus"></i></a></li>	
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<!--Member 04-->
+							<div class="team-member">
+								<img src="img/team/Milan.jpg" alt="team member" class="img-responsive">
+								<div class="team-member-overlay">
+									<div class="team-member-info text-center">
+										<h6>Milan Dangol</h6>
+										<p> Database Administrator</p>
+										<ul class="social-list">
+											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+											<li><a href="#"><i class="fa fa-google-plus"></i></a></li>	
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<!--Member 05-->
+							<div class="team-member">
+								<img src="img/team/team-2.jpg" alt="team member" class="img-responsive">
+								<div class="team-member-overlay">
+									<div class="team-member-info text-center">
+										<h6>Nikesh Lawat</h6>
+										<p> Digital Operations Manger</p>
+										<ul class="social-list">
+											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+											<li><a href="#"><i class="fa fa-google-plus"></i></a></li>	
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--Team ends-->
+
+<!--end of code by ishan-->
+
 <section class="user">
   <div class="user_options-container">
     <div class="user_options-text">
@@ -433,7 +327,7 @@ if(session.getAttribute("username") == null){
       </div>
     </div>
     
-    <div class="user_options-forms" id="user_options-forms">
+    <div class="user_options-forms" id="user_options-forms" >
       <div class="user_forms-login">
           <h2 class="forms_title">Login</h2>
           <%String loginError="";
@@ -464,7 +358,7 @@ if(session.getAttribute("username") == null){
       </div>
         
         
-      <div class="user_forms-signup" style="top: 10px;">
+      <div class="user_forms-signup" style="top: 10px;" id="user">
         <h2 class="forms_title">Sign Up</h2>
         
         
@@ -493,10 +387,36 @@ if(session.getAttribute("username") == null){
     </div>
   </div>
 </section>
+        
+        
+        
 <%} else{
         response.sendRedirect("Dashboard");
 
 }%>   
+
+
+	<!--Footer-->
+	<footer class="text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<p>
+						Copyright &copy; 2020 All Rights Reserved By <span>Herald College Kathmandu.</span>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!--Back to top-->
+		<a href="#home" id="back-to-top" class="btn btn-sm btn-yellow btn-back-to-top smooth-scroll" title="home" role="button">
+			<i class="fa fa-angle-up"></i>
+		</a>
+	
+	</footer>
+	<!--Footer ends-->
+
+
 <script type="text/javascript">
 /**
  * Variables
@@ -520,7 +440,36 @@ loginButton.addEventListener('click', () =>{
   userForms.classList.remove('bounceLeft')
   userForms.classList.add('bounceRight')
 }, false)
+
 </script>
+
+	<!--JQuery-->
+	<script type="text/javascript" src="js/jquery.js"></script>
+
+	<!--Bootstrap JS-->
+	<script type="text/javascript" src="js/bootstrap/bootstrap.js"></script>
+
+	<!--Owl carousel JS-->
+	<script src="js/owl-carousel/owl.carousel.min.js"></script>
+ 
+	<!--Waypointsx-->
+	<script src="js/waypoints/jquery.waypoints.min.js"></script>
+
+	<!--Responsive tabs
+	<script src="js/responsive-tabs/jquery.responsiveTabs.min.js"></script> -->
+
+	<!--Isotope-->
+	<script src="js/isotope/isotope.pkgd.min.js"></script>
+
+	<!--Magnific popup
+	<script src="js/magnific-popup/jquery.magnific-popup.min.js"></script>-->
+
+	<!--Easing-->
+	<script src="js/easing/jquery.easing.1.3.js"></script>
+
+	<!--Custom JS-->
+	<script src="js/script.js"></script>
+	<script src="js/user.js"></script>
 
 </body>
 </html>

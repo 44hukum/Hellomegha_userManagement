@@ -2,8 +2,11 @@ package databasemanagement;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -22,6 +25,16 @@ public class CreateDatabase implements Database{
 		this.dbpassword = dbpassword;
 		this.dbhost = dbhost;
 	}
+        public void insertAdminData(Connection ad){
+                String sql="insert into admin(username,password,firstname,lastname,email,phonenumber) values('hukum','123','a','b','a@b','980980')";
+            try {
+                ad.createStatement().execute(sql);
+            } catch (SQLException ex) {
+                Logger.getLogger(CreateDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                      
+        
+        }
 	@Override
 	public boolean configureDatabase() throws ClassNotFoundException, SQLException {
 		System.out.println("Hello, My name is Rocketman, I am a your guide to create and manage database :  ");
@@ -62,14 +75,17 @@ public class CreateDatabase implements Database{
 			System.out.println("Database ********** usermanagement *********** creation ******** successfull ********* ");
 			connection.prepareStatement("use userManagement").execute(); 
 			
-			
+                        
 			CreateTable  table=new CreateTable();	//creates table for userManagement 		
 			table.userRegistration(connection);
 			table.admin(connection);
 			table.blockedUser(connection);
 			table.userHistory(connection);
 			table.adminHistory(connection);
-			System.out.println("done!!");
+			System.out.println("done!! ******* Record Insertion processig ...");
+                        
+			insertAdminData(connection);
+                        System.out.println("");
 			return true;
 		}	
 		return false;

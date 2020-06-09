@@ -27,7 +27,7 @@ public class Dashboard extends HttpServlet{
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-	 public void doPost(HttpServletRequest request,HttpServletResponse response)
+       public void doPost(HttpServletRequest request,HttpServletResponse response)
          throws IOException, ServletException {
              System.out.println("com.hellomegha.usermanagement.Dashboard.doPost()");
              
