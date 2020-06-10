@@ -44,7 +44,7 @@ public class Initiate {
 			(new CreateDatabase(databaseUrl,user,password,host)).configureDatabase();
 		}
 		public static void main(String[] args) throws ClassNotFoundException, SQLException {
-			(new Initiate()).createDb();;
+			(new Initiate()).createDb();
 		}
 	
 } 

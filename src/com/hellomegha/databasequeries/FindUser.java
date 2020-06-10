@@ -2,6 +2,7 @@ package com.hellomegha.databasequeries;
 
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -76,8 +77,12 @@ public class FindUser implements UserRecord{
 	 *returns the blocked user 
 	 * */
 	
-	public ResultSet blockedUserTableRecord() throws SQLException {	 //Takes the connection to the database
-		return connection.makeConnection().prepareStatement("select * from blockedUser;").executeQuery();
+	public ResultSet blockedUserTableRecord(Date start,Date end) throws SQLException {	 //Takes the connection to the database
+		PreparedStatement statement=connection.makeConnection().prepareStatement("select * from blockedUser where "
+				+ "Date>=? AND  Date<=? AND Reason_log='Blocked'");
+		statement.setDate(1, start);		
+		statement.setDate(2, end);		
+		return statement.executeQuery();	
 	}
 	
 	public ResultSet blockedUser(String username) throws SQLException {	//returns the record of a particular user
@@ -97,5 +102,18 @@ public class FindUser implements UserRecord{
 		return statement.executeQuery();
 		
 	}
-	
+	/*
+        *user created in a given date range
+         
+         */
+        
+        
+	public ResultSet user_created_in_a_date_range(Date start,Date end) throws SQLException {	 //Takes the connection to the database
+		PreparedStatement statement=connection.makeConnection().prepareStatement("select * from userHistory where "
+				+ "Date>=? AND  Date<=? AND Activity_log='Account created'");
+		statement.setDate(1, start);		
+		statement.setDate(2, end);		
+		return statement.executeQuery();	
+	}
+        
 }

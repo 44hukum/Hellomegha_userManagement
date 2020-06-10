@@ -57,6 +57,10 @@ public class Login extends HttpServlet{
                          ResultSet isUser=(new FindUser()).getUser(username);
                           while(isUser.next()){
                             if(isUser.getString("password").equals(password)){
+                               if(isUser.getString("Status").equals("Blocked")){
+                                 session.setAttribute("loginError","Blocked user is not allowed");
+                          response.sendRedirect("welcome.jsp");
+                               }else{
                                session.setAttribute("username", username);
                                   session.setAttribute("role", "user");
                                   session.setAttribute("userID",isUser.getInt("userId"));
@@ -64,6 +68,7 @@ public class Login extends HttpServlet{
         (new InsertRecord()).intoUserHistory(userId,"Successfully logged in to the system");
                                   response.sendRedirect("Dashboard");
                               }
+                            }//end if else statement
                             }               
                           
                           //3.

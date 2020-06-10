@@ -15,6 +15,7 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <link href="css/sb-admin-2.css" rel="stylesheet">
+     
 </head>
 <body id="page-top">
 
@@ -110,37 +111,7 @@
           </form>
 
                   <a href="logout">logout</a>
-          <!-- Topbar Navbar -->
-<!--          <ul class="navbar-nav ">
-
-             Nav Item - User Information 
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                      change here or say manage here
-              
-                      
-                  </span>
-                <img class="img-profile rounded-circle" src="img/team/team-1.jpg">
-              </a>
-               Dropdown - User Information 
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="profile">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-              </div>
-            </li>
-          </ul>-->
+      
         </nav>
         <!-- End of Navbar -->
 
@@ -150,7 +121,9 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <% if(session.getAttribute("role").equals("admin")){%>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="document.getElementById('id01').style.display='block'" style="width:auto;""><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+          <%}%>
           </div>
 
           <!-- Content Row -->
@@ -181,18 +154,18 @@
                     <div class="col mr-2">
                         <%
                             CountUser user=new CountUser();
-                            int totalUser=user.countUser();
-                            int adminP=user.countAdmin();
-                            int useRr=user.countBlockedUser();
+                            double totalUser=user.countUser();
+                            double adminP=user.countAdmin();
+                            double useRr=user.countBlockedUser();
                              int blockedUser=0;
                             try{
-                                blockedUser= useRr/totalUser *100;
+                                blockedUser=(int)(useRr/totalUser *100);
                             }catch(Exception e){
                                  
                             }    
                         %>
                       <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Total Users</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= totalUser%></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= (int)totalUser%></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -211,7 +184,7 @@
                       <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Blocked Users</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%= blockedUser%>%</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%=blockedUser%>%</div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
@@ -235,7 +208,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Profile</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= adminP%></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%=(int)adminP%></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -258,9 +231,9 @@
                   <h6 class="m-0 font-weight-bold text-dark">Growth Rate</h6>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body">
+                <div class="card-body" style="height: 437px;">
                   <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+                     <div id="chartContainer" style=""></div>
                   </div>
                 </div>
               </div>
@@ -275,19 +248,12 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                      <canvas id="myPieChart">
-                            
-                      </canvas>
+                  <div class="chart-pie pt-4 pb-2" style="height: calc(20rem - -77px) !important;">
+                      <div id="myPieChart"  style="height: 437px;">
+                           <!--donut chart-->
+                      </div>
                   </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Active
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Blocked
-                    </span>
-                  </div>
+                 
                 </div>
               </div>
             </div>
@@ -336,7 +302,139 @@
       </div>
     </div>
   </div>
+  
+  <!--form submission to generate report-->
+    
+<div id="id01" class="modal">
 
+  <div class="modal-content animate">
+            <div class="imgcontainer">
+                  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                 </div>
+            <div class="container">
+      <h2>Generate Report</h2>
+    
+
+  <form  action="Report.jsp">
+        <label for="datemax">From: </label>
+        <input type="date" name="startDate" ><br>
+            <label for="datemin">to</label>
+         <input type="date" name="endDate" ><br>
+    
+        <button type="Submit" class="btn btn-warning">Generate</button>
+
+        </form>
+        </div>
+  </div>
+
+</div>
+
+  
+  <!--end of form submission to generate report-->
+  
+ <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script>
+ var x=[1, 11, 11,11, 11, 11, 1];
+ var options = {
+          series: [
+          {
+            name: "No of user",
+            data: x,
+          },
+          
+        ],
+          chart: {
+          height: 350,
+          type: 'line',
+          dropShadow: {
+            enabled: true,
+            color: '#000',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 0.2
+          },
+          toolbar: {
+            show: true
+          }
+        },
+        colors: ['#77B6EA', '#545454'],
+        dataLabels: {
+          enabled: true,
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        
+        grid: {
+          borderColor: '#e7e7e7',
+          row: {
+            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+            opacity: 0.5
+          },
+        },
+        markers: {
+          size: 1
+        },
+        xaxis: {
+          categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          title: {
+            text: 'Days'
+          }
+        },
+        yaxis: {
+          title: {
+            text: 'No of user'
+          },
+         
+        },
+        legend: {
+          position: 'top',
+          horizontalAlign: 'right',
+          floating: true,
+          offsetY: -25,
+          offsetX: -5
+        }
+        };
+        var chart = new ApexCharts(document.querySelector("#chartContainer"), options);
+        chart.render();
+      
+      //donut chart
+      var xo=41;
+      var xy=17;
+      var option = {
+          series: [xo, xy],
+          chart: {
+          type: 'donut',
+        },
+         labels: ["Active", "Blocked"],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            }
+           
+          }
+        }]
+        };
+
+      
+       var c = new ApexCharts(document.querySelector("#myPieChart"), option);
+        c.render();
+        
+  function generateR(){
+       // When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+   }
+</script>
+      
+  </script>
+ 	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

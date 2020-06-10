@@ -32,6 +32,8 @@ public class BlockUser extends HttpServlet {
             if( block.blockUser(user)){
                try {
                    (new InsertRecord()).intoUserHistory(user,"Account blocked by Admin"); //recorded if the account is deleted
+                   (new InsertRecord()).intoBlockedUser(user,"Blocked");
+                   
                    response.sendRedirect("Dashboard");
                } catch (SQLException ex) {
                    Logger.getLogger(BlockUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,6 +48,7 @@ public class BlockUser extends HttpServlet {
             if( block.unblockUser(user)){
                try {
                    (new InsertRecord()).intoUserHistory(user,"Account unblocked by Admin"); //recorded if the account is deleted
+                     (new InsertRecord()).intoBlockedUser(user,"unBlocked");
                    response.sendRedirect("Dashboard");
                } catch (SQLException ex) {
                    Logger.getLogger(BlockUser.class.getName()).log(Level.SEVERE, null, ex);

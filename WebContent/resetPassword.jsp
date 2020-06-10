@@ -132,10 +132,10 @@
             </div>
             <div class="form-group">
                 <!-- use java script to check both the password chosen  are same-->
-                <input type="password" class="form-control" name="password" placeholder="New-Password" required="required">
+                <input type="password" class="form-control" id="passwordID" name="password" placeholder="New-Password" required="required">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm New-Password" required="required">
+                <input type="password" class="form-control" oninput="check(this);" name="confirm_password" placeholder="Confirm New-Password" required="required">
             </div>        
            
             <div class="form-group">
@@ -144,5 +144,18 @@
         </form>
       <%session.removeAttribute("ER");%>
     </div>
+    
+<!--Password and Confir password must match-->
+<script language='javascript' type='text/javascript'>
+function check(input) {
+    if (input.value != document.getElementById('passwordID').value) {
+        input.setCustomValidity('Password Must be Matching.');
+    } else {
+        // input is valid -- reset the error message
+        input.setCustomValidity('');
+    }
+}
+
+</script>
 </body>
 </html>

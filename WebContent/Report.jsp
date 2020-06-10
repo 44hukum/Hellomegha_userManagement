@@ -1,3 +1,4 @@
+<%@page import="com.hellomegha.databasequeries.GenerateReport"%>
 <%@page import="com.hellomegha.usermanagement.Dashboard"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.util.logging.Logger"%>
@@ -122,33 +123,7 @@
           </form>
 
                   <a href="logout">logout</a>
-          <!-- Topbar Navbar -->
-<!--          <ul class="navbar-nav ">
-
-             Nav Item - User Information 
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hello Megha</span>
-                <img class="img-profile rounded-circle" src="img/team/team-1.jpg">
-              </a>
-               Dropdown - User Information 
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="profile">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-              </div>
-            </li>
-          </ul>-->
+       
         </nav>
         <!-- End of Navbar -->
 
@@ -165,55 +140,31 @@
 	<thead class="thead-dark mb-0 ">
 		<tr>
                         <th data-field="userid" data-sortable="true">User ID</th>
-                        <th data-field="name" data-filter-control="input" data-sortable="true">first name</th>
+                        <th data-field="name" data-filter-control="input" data-sortable="true">Blocked Date</th>
                         
-			<th data-field="date" data-filter-control="select" data-sortable="true">last name</th>
-			<th data-field="name" data-filter-control="input" data-sortable="true">username</th>
-			<th data-field="date" data-filter-control="select" data-sortable="true">E-mail</th>
-			<th data-field="status" data-filter-control="select" data-sortable="false">Status</th>
-                     
-			<% if(session.getAttribute("role").equals("admin")){%>
-                        <th data-field="profile" data-sortable="false">Show Profile</th>
-                         <th data-field="status" data-filter-control="select" data-sortable="false">Delete user</th>
-                        <%}%>
-                          
+			<th data-field="date" data-filter-control="select" data-sortable="true">Blocked Reason</th>
+			
 		</tr>
 	</thead>
 	
 	
 		<tbody>
-                    <%
-                       
-                        try {
-          //sends user details to jsp
-        ResultSet users=(new FindUser()).userTableRecord();
-        while(users.next()){
-           %>
+                    <% //
+                       String start=request.getParameter("startDate");
+                      String end=request.getParameter("endDate");
+                     ResultSet result=(new GenerateReport()).blocked_user_report(start,end);
+       //sends user details to jsp
+              Sysou 
+        %>
                    <tr>
-                       <td><%= users.getInt("userID")%></td>
-                       <td><%= users.getString("firstName")%></td>
-                       <td><%= users.getString("lastname")%></td>
-			<td><%= users.getString("username")%></td>
-			<td><%= users.getString("email")%></td>
-			<td><%= users.getString("Status")%></td>
-			
-                        <% if(session.getAttribute("role").equals("admin")){
+                       <td>%></td>
+                       <td><%= start%></td>
+                         <td><%=end%></td>
                        
-                        %>                        
-                        <td><a href="#" onclick=a("<%=users.getString("username")%>")>view profile</a></td>
-                           <td><a href="#" onclick=deleteUser("<%=users.getInt("userId")%>")>Delete User</a></td>
-			<%}%>
+			
 		</tr> 
                
-                    <%
-        }
-
-        System.out.println(users);
-        session.setAttribute("users", users);
-    } catch (SQLException ex) {
-        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-    }
-                    %>
+                   
 			
 	</tbody>
 	

@@ -102,7 +102,7 @@ if(session.getAttribute("username") == null){
 								<li><a class="smooth-scroll" href="#"></a></li>
 								<li><a class="smooth-scroll" href="#"></a></li>
 								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#user_options-forms">Login</a></li>
+								<li><a class="smooth-scroll" href="#user">Login</a></li>
 								<li><a class="smooth-scroll" href="#user">Signup</a></li>
 							</ul>
 						</div>
@@ -256,7 +256,7 @@ if(session.getAttribute("username") == null){
 
 							<!--Member 03-->
 							<div class="team-member">
-								<img src="img/team/team-3.jpg" alt="team member" class="img-responsive">
+								<img src="img/team/Megha.jpg" alt="team member" class="img-responsive">
 								<div class="team-member-overlay">
 									<div class="team-member-info text-center">
 										<h6>Megha Magar</h6>
@@ -311,7 +311,7 @@ if(session.getAttribute("username") == null){
 
 <!--end of code by ishan-->
 
-<section class="user">
+<section class="user"  style="padding-top: 100px;">
   <div class="user_options-container">
     <div class="user_options-text">
       <div class="user_options-unregistered">
@@ -327,8 +327,8 @@ if(session.getAttribute("username") == null){
       </div>
     </div>
     
-    <div class="user_options-forms" id="user_options-forms" >
-      <div class="user_forms-login">
+      <div class="user_options-forms" id="user_options-forms" >
+        <div class="user_forms-login" id="user">
           <h2 class="forms_title">Login</h2>
           <%String loginError="";
           if(session.getAttribute("loginError") !=null){
@@ -344,10 +344,10 @@ if(session.getAttribute("username") == null){
         <form class="forms_form" action="login" method="post">
           <fieldset class="forms_fieldset">
             <div class="forms_field">
-              <input type="text" placeholder="username" name="username" class="forms_field-input" required autofocus />
+              <input type="text" placeholder="username" name="username" class="forms_field-input" required />
             </div>
             <div class="forms_field">
-              <input type="password"  name="password" class="forms_field-input" required />
+              <input type="password"  name="password" placeholder="password" class="forms_field-input" required />
             </div>
           </fieldset>
           <div class="forms_buttons">          
@@ -358,7 +358,7 @@ if(session.getAttribute("username") == null){
       </div>
         
         
-      <div class="user_forms-signup" style="top: 10px;" id="user">
+      <div class="user_forms-signup" style="top: 0px;" id="user">
         <h2 class="forms_title">Sign Up</h2>
         
         
@@ -374,12 +374,15 @@ if(session.getAttribute("username") == null){
             <div class="forms_field">
               <input type="phone" placeholder="phonenumber" name="phonenumber" class="forms_field-input" required />
             </div>
+            <div class="forms_field">
+              <input type="password" placeholder="password" id="passwordID" name="password" class="forms_field-input" required />
+            </div>
              <div class="forms_field">
-              <input type="password" placeholder="conform password" name="password" class="forms_field-input"  />
+                 <input type="password" placeholder="confirm password" oninput="check(this);" name="password" class="forms_field-input" required />
             </div>           
           </fieldset>
-           <input type="checkbox">I agree to accept Terms and condition 
-          <div class="forms_buttons">
+            <input type="checkbox" required> I agree to accept Terms and condition 
+          <div class="forms_buttons" style="margin-top: 0px;">
             <input type="submit" value="Sign up" class="forms_buttons-action">
           </div>
         </form>
@@ -415,6 +418,19 @@ if(session.getAttribute("username") == null){
 	
 	</footer>
 	<!--Footer ends-->
+
+<!--Password and Confir password must match-->
+<script language='javascript' type='text/javascript'>
+function check(input) {
+    if (input.value != document.getElementById('passwordID').value) {
+        input.setCustomValidity('Password Must be Matching.');
+    } else {
+        // input is valid -- reset the error message
+        input.setCustomValidity('');
+    }
+}
+
+</script>
 
 
 <script type="text/javascript">

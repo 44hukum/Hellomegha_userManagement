@@ -16,14 +16,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author wanu
  */
-public class DeleteUser extends HttpServlet {
-        private DeleteRecord deleteU=new DeleteRecord();
-
+public class DeleteProfile extends HttpServlet {
+  private DeleteRecord deleteU=new DeleteRecord(); //to delete user
     /**
      * 
      *
@@ -35,30 +35,23 @@ public class DeleteUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(request.getParameter("deleteUser") !=null){
-         Integer user=Integer.parseInt((request.getParameter("deleteUser")));
-                if(deleteU.deleteUser(user)){
+        HttpSession session=request.getSession();
+        if(session.getAttribute("userID")!=null){
+         Integer user=(Integer)(session.getAttribute("userID"));
+                if(deleteU.deleteUser(user)){ 
              try {
-                 (new InsertRecord()).intoUserHistory(user,"Account deleted by Admin"); //recorded if the account is deleted
-                 response.sendRedirect("Dashboard");
+                session.removeAttribute("username");
+                session.removeAttribute("userID");
+                session.removeAttribute("role");
                 
-             } catch (SQLException ex) {
-                 Logger.getLogger(DeleteUser.class.getName()).log(Level.SEVERE, null, ex);
+                response.sendRedirect("welcome.jsp");
+                
+             } catch (Exception ex) {
+                 Logger.getLogger(DeleteUser.class.getName()).log(Level.INFO, "user deleted", ex);
              }
         } //end if  
                 
          System.out.println(user.getClass().getName());
         }//end if
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "user Deletion servlet";
-    }// </editor-fold>
-
 }

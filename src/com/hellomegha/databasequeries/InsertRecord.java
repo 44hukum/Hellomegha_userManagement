@@ -70,8 +70,34 @@ public class InsertRecord implements RecordInsertition{
 	}
 	
 	@Override
-	public boolean intoBlockedUser() throws SQLException {
+	public boolean intoBlockedUser(int userID,String reason) throws SQLException {
+            //creates the time stamp
+		java.sql.Date date=new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		java.sql.Timestamp time=new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+			
+		String sql="insert into blockedUser(userID,Date,time,Reason_log) values(?,?,?,?)";
+		Connection con=connection.makeConnection();		
+		PreparedStatement statement=con.prepareStatement(sql);
+		statement.setInt(1,userID);
+		statement.setDate(2, date);
+		statement.setTimestamp(3, time);
+		statement.setString(4, reason);
+                 try {	
+		statement.execute();
+                       
+		          System.out.println("inside BlockedUser");
+                    return true;      		
+			
+		}catch(Exception e) {}
+	
+		if(statement !=null) {
+			statement.close();
+		}
+		if(con !=null) {
+			con.close();
+		}
 		return false;
+            
 	}
 
 	@Override

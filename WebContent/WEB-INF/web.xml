@@ -14,6 +14,10 @@
         <servlet-name>BlockUser</servlet-name>
         <servlet-class>com.hellomegha.usermanagement.BlockUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteProfile</servlet-name>
+        <servlet-class>com.hellomegha.usermanagement.DeleteProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -88,6 +92,10 @@
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <!--to update Account-->
+    <servlet-mapping>
+        <servlet-name>DeleteProfile</servlet-name>
+        <url-pattern>/DeleteProfile</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>
             welcome.jsp
