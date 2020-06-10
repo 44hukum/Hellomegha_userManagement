@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="com.hellomegha.databasequeries.GenerateReport"%>
 <%@page import="com.hellomegha.usermanagement.Dashboard"%>
 <%@page import="java.sql.SQLException"%>
@@ -121,12 +123,12 @@
               </div>
             </div>
           </form>
-
+          
                   <a href="logout">logout</a>
        
         </nav>
         <!-- End of Navbar -->
-
+<h3>Report</h3>
         <!-- Begin Page Content -->
         <div class="container bootstrap snippet">
           <div class="row">
@@ -134,7 +136,9 @@
                   <div class="main-box no-header clearfix">
                       <div class="main-box-body clearfix">
                           <div class="table-responsive">
-                              <table class="table user-list" >
+                              
+                              <h4>User Blocked in between <%=request.getParameter("startDate")%> and <%=request.getParameter("endDate")%></h4>
+                              <table class="table user-list">
                                		
 			
 	<thead class="thead-dark mb-0 ">
@@ -142,7 +146,7 @@
                         <th data-field="userid" data-sortable="true">User ID</th>
                         <th data-field="name" data-filter-control="input" data-sortable="true">Blocked Date</th>
                         
-			<th data-field="date" data-filter-control="select" data-sortable="true">Blocked Reason</th>
+			
 			
 		</tr>
 	</thead>
@@ -150,25 +154,73 @@
 	
 		<tbody>
                     <% //
-                       String start=request.getParameter("startDate");
-                      String end=request.getParameter("endDate");
-                     ResultSet result=(new GenerateReport()).blocked_user_report(start,end);
+                        
+                        
+            String start=request.getParameter("startDate");
+            String end=request.getParameter("endDate");
+            
+            Date  startD = new SimpleDateFormat("yyyy-MM-dd").parse(start); //get the date
+           Date  endD = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+        //start date and end date
+            java.sql.Date startDate = new java.sql.Date(startD.getTime());
+         java.sql.Date endDate = new java.sql.Date(endD.getTime());
+                      
+                     ResultSet result=(new FindUser()).blockedUserTableRecord(startDate, endDate);
        //sends user details to jsp
-              Sysou 
+             while(result.next()){ 
         %>
                    <tr>
-                       <td>%></td>
-                       <td><%= start%></td>
-                         <td><%=end%></td>
+                       <td><%=result.getInt("userID")%></td>
+                       <td><%=result.getDate("Date")%></td>
+                     
                        
 			
 		</tr> 
-               
+               <%}%>
                    
 			
 	</tbody>
 	
 </table>
+               <h4>User Created in between <%=start%> and <%=end%></h4>        
+     
+               <!--table for user Registered created-->
+               
+               <table class="table user-list">
+                               		
+			
+	<thead class="thead-dark mb-0 ">
+		<tr>
+                        <th data-field="userid" data-sortable="true">User ID</th>
+                        <th data-field="name" data-filter-control="input" data-sortable="true">Registered Date</th>
+                 		
+			
+		</tr>
+	</thead>
+	
+	
+		<tbody>
+                    <% //
+                        
+             
+                     ResultSet user=(new FindUser()).user_created_in_a_date_range(startDate, endDate);
+       //sends user details to jsp
+             while(user.next()){ 
+        %>
+                   <tr>
+                       <td><%=user.getInt("userID")%></td>
+                       <td><%=user.getDate("Date")%></td>
+                     
+                       
+			
+		</tr> 
+               <%}%>
+                   
+			
+	</tbody>
+	
+</table>
+          <!--end of report generation --> 
                     <!--user selection form-->
                     <form action="profilechoicesecond.jsp" style="display:none;" id="userD">
                         <input type="text" id="textWriter" value="" name="textVal">

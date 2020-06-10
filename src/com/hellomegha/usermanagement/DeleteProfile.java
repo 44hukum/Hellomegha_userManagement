@@ -36,6 +36,7 @@ public class DeleteProfile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session=request.getSession();
+        
         if(session.getAttribute("userID")!=null){
          Integer user=(Integer)(session.getAttribute("userID"));
                 if(deleteU.deleteUser(user)){ 
@@ -43,7 +44,7 @@ public class DeleteProfile extends HttpServlet {
                 session.removeAttribute("username");
                 session.removeAttribute("userID");
                 session.removeAttribute("role");
-                
+                 System.out.println(user.getClass().getName());
                 response.sendRedirect("welcome.jsp");
                 
              } catch (Exception ex) {

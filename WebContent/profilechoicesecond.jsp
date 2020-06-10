@@ -124,8 +124,7 @@
             </div>
                     <form method="post" action="DeleteProfile">
                         <input type="submit" value="Delete Account">
-                    
-                    </form>
+                     </form>
               <%
                     //end of admin history
               } catch (SQLException e) {

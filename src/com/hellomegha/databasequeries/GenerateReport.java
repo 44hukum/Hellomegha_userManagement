@@ -40,13 +40,10 @@ public class GenerateReport {
     java.sql.Date endDate = new java.sql.Date(endD.getTime());
        
             //query the database with two date
-          result=(new FindUser()).blockedUserTableRecord(startDate, endDate);
+          return result=(new FindUser()).blockedUserTableRecord(startDate, endDate);
             //get the blocked user data
-            while(result.next()){
-                System.out.println(result.getInt("userID"));
-            
-            }
-            
+           
+           
             //count total blocked user  and save data
             //print all the user
         } catch (SQLException ex) {
@@ -69,7 +66,7 @@ public class GenerateReport {
     java.sql.Date endDate = new java.sql.Date(end.getTime());
        
             //query the database with two date
-             result=(new FindUser()).user_created_in_a_date_range(startDate, endDate);
+            result=(new FindUser()).user_created_in_a_date_range(startDate, endDate);
             //get the blocked user data
             while(result.next()){
                 System.out.println(result.getInt("userID"));
@@ -86,6 +83,6 @@ public class GenerateReport {
     
     public static void main(String[] args) throws ParseException {
         GenerateReport obj=new GenerateReport();
-       
+       obj.blocked_user_report("2020-06-10", "2020-06-10");
     }
 }
