@@ -158,10 +158,8 @@
                             double adminP=user.countAdmin();
                             double useRr=user.countBlockedUser();
                              int blockedUser=0;
-                             int activeuser=0;
                             try{
                                 blockedUser=(int)(useRr/totalUser *100);
-                                activeuser=(int)((totalUser-useRr)/totalUser * 100);
                             }catch(Exception e){
                                  
                             }    
@@ -186,7 +184,7 @@
                       <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Blocked Users</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="getBlockedUser" value="<%=blockedUser%>"><%=blockedUser%>%</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%=blockedUser%>%</div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
@@ -336,9 +334,6 @@
   
  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script>
-      
-    var xaa ="<%=blockedUser%>";  
-   
  var x=[1, 11, 11,11, 11, 11, 1];
  var options = {
           series: [
@@ -405,8 +400,8 @@
         chart.render();
       
       //donut chart
-      var xo=<%=activeuser%>;
-      var xy=<%=blockedUser%>;
+      var xo=41;
+      var xy=17;
       var option = {
           series: [xo, xy],
           chart: {
@@ -417,7 +412,7 @@
           breakpoint: 480,
           options: {
             chart: {
-              width: 0
+              width: 200
             }
            
           }
