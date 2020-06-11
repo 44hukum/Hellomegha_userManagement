@@ -131,7 +131,7 @@
 
             <!-- Container 1 -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card border-left-primary shadow h-100 py-2" style="border-left: .25rem solid #008ffb!important;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -148,7 +148,7 @@
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card border-left-primary shadow h-100 py-2" style="border-left: .25rem solid #008ffb!important;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -158,8 +158,10 @@
                             double adminP=user.countAdmin();
                             double useRr=user.countBlockedUser();
                              int blockedUser=0;
+                             int activeuser=0;
                             try{
                                 blockedUser=(int)(useRr/totalUser *100);
+                                 activeuser=(int)((totalUser-useRr)/totalUser *100);
                             }catch(Exception e){
                                  
                             }    
@@ -177,7 +179,7 @@
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card border-left-primary shadow h-100 py-2" style="border-left: .25rem solid #008ffb!important;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -203,7 +205,7 @@
 
             <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card border-left-primary shadow h-100 py-2" style="border-left: .25rem solid #008ffb!important;">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -400,8 +402,8 @@
         chart.render();
       
       //donut chart
-      var xo=41;
-      var xy=17;
+      var xo=<%=activeuser%>;
+      var xy=<%=blockedUser%>;
       var option = {
           series: [xo, xy],
           chart: {
