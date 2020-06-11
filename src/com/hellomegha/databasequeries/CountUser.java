@@ -6,12 +6,8 @@
 package com.hellomegha.databasequeries;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,32 +68,7 @@ private DatabaseConnection connection=new DatabaseConnection();
         
         return 0;
     }
-    public int countUserInDifferentDate(String date) {
-        Date start;
-    try {
-        start = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-         java.sql.Date startDate = new java.sql.Date(start.getTime());
     
-        //start date and end date
-   
-     Connection con=connection.makeConnection();
-     String sql="SELECT COUNT(*) FROM userHistory where Date=? AND Activity_log=?;";
-        PreparedStatement statement=con.prepareStatement(sql);
-        statement.setDate(1, startDate);
-        statement.setString(1, "Account created");
-        ResultSet a=statement.executeQuery();
-        while(a.next()){
-            return a.getInt(1);
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(CountUser.class.getName()).log(Level.SEVERE, null, ex);
-    }catch (ParseException ex) {
-        Logger.getLogger(CountUser.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    
-        
-        return 0;
-    }
     public static void main(String[] args) {
         CountUser obj=new CountUser();
             System.out.println( obj.countBlockedUser());
