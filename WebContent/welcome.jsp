@@ -15,7 +15,7 @@
 	<meta name="viewport" content="width=device-width, inital-scale=1">
 
 	<!--Title-->
-	<title>SAD Usermanagement</title>
+	<title>SAD User Management</title>
 
 	<!--Icon-->
 	<link rel="shortcut icon" href="img/logo/logo.png">
@@ -44,8 +44,418 @@
 	<!--Custom CSS-->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/user.css">
+          
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <style>
+    /*--- Extra Bootstrap Column Padding --*/
+[class*="col-"] {
+  padding: 1rem;
+}
+body{
+    overflow: scroll;
+    width: 100%;
+    scroll-behavior: smooth;	
+}
+
+/*--- Bootstrap Mobile Gutter Fix --*/
+.row, .container-fluid {
+margin-left: 0px!important;
+margin-right: 0px!important;
+}
+
+/*--- Fix for Fixed Navbar jumping on scroll --*/
+.fixed-top  {
+ -webkit-backface-visibility: hidden;
+}
+
+/*--- Fixed Landing Page Section --*/
+.landing {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: table;
+  z-index: -1;
+}
+.for_contact a{
+	text-decoration: none;
+	}
+.for_contact a:hover{
+	text-decoration: none;
+	color: #1ebba3;
+	}
+
+.home-wrap {
+  clip: rect(0, auto, auto, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.home-inner {
+  position: fixed;
+  display: table;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  will-change: transform;
+}
+
+/*--- iOS Fixed Background Image --*/
+.fixed-background {
+  position: relative;
+  width: 100%;
+}
+.fixed-wrap {
+  clip: rect(0, auto, auto, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -999!important;
+}
+.fixed {
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  will-change: transform;
+}
+/* Buy Thiss */
+.showDetail{
+	margin-top: 0.3rem;
+}
+/* end of Buy Thiss */
+
+
+/* font-family: 'Lato', sans-serif; */
+body{
+  overflow-x: hidden;
+  font-family: 'Lato', sans-serif;
+  color: #505962 ;
+  text-align: justify;
+}
+.offset:before{
+  display: block;
+  content: "";
+  height: 3.79rem;
+  margin-top: -4rem;
+  margin-bottom: 0;
+  padding-bottom: 0px;
+}
+#developer.offset:before{
+	height: 0rem;
+}
+.navbar{
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: .9rem; /* 1 rem = 16pixels */ 
+  letter-spacing: .1rem;
+  background-color: rgba(0,0,0,0.5)!important; /* 40% transparency */
+
+}
+.navbar-brand img{
+  height: 2rem;
+}
+.navbar-nav li{
+  padding-right: .7rem;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+  color: white;
+  padding-top: .8rem;
+}
+      .navbar-dark .navbar-nav .nav-link.active,
+      .navbar-dark .navbar-nav .nav-link:hover{
+         color: #1ebba3;
+      }
+
+/* landing page css  */
+.home-inner{
+  
+  background-image: url(img/background/black-computer-keyboard-on-black-table-3815729.jpg);
+}
+
+.caption{
+  width: 100%;
+  max-width: 100%;
+  position: absolute;
+  top: 38%;
+  z-index: 1;
+  color: white;
+  text-transform: uppercase;
+}
+
+.caption h1{
+  font-size: 3.8rem;
+  font-weight:700;
+  letter-spacing: .3rem;
+  text-shadow: .1rem .1rem .8rem black;
+  padding-bottom: 2rem;
+}
+.caption h3{
+  font-size: 2rem;
+  text-shadow: .1rem .1rem .5rem black;
+  padding-bottom: 1.6rem;
+}
+.btn-lg{
+  border-width: medium;
+  border-radius: 0;
+  padding: .6rem 1.3rem;
+  font-size: 1.1rem;
+}
+
+
+/* About section */
+.narrow{
+  width: 75%;
+  margin: 1.5rem auto;
+   }
+#About{
+  
+}
+.narrow h1{
+  font-size: 2.4rem;
+}
+.narrow p{
+ 
+}
+.btn-secondary{
+  border-width: medium;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  padding: .6rem 1.2rem;
+  margin: 1rem;
+  color: white;
+  background-color: #1ebba3;
+  border-color: #1ebba3;
+}
+
+/* For Category */
+.jumbotron{
+  margin-bottom: 0;
+  padding: 2rem 0 3.5rem;
+  border-radius: 0;
+}
+h3.heading{
+font-size: 1.9rem;
+font-weight: 700;
+ text-transform: uppercase;
+ margin-bottom: 1.9rem;
+}
+.heading-underline{
+    width: 3rem;
+    height:.2rem;
+    background-color: #1ebba3;
+    margin: 0 auto 2rem;
+
+}
+.features svg.svg-inline--fa.fa-w-16{
+  color: #1ebba3;
+}
+.features svg.svg-inline--fa{
+	padding-top: 30px;
+  color: #1ebba3;
+}
+.featiure{}
+
+.features h3{
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  padding-bottom: .4rem;
+}
+.features p{
+  font-size: 1.1rem;
+ }
+
+ /* Resources section of css */
+ 
+ .dark{
+   background-color: rgba(0,0,0,0.75);
+   color: white;
+   padding: 7rem 2rem;
+ }
+ .show_Details{
+   
+   color: white;
+   
+   width: 100%;
+ }
+ .fixed-background h3{
+  margin-bottom: 2rem;
+ }
+ .fixed-background p{
+  margin-top: 1.5rem;
+ }
+
+ /* CLient section  */
+ .contact img{
+   width: 100%;
+  border-radius: 60%;
+ }
+ blockquote .svg-inline--fa{
+  color: #1ebba3;
+  margin: 1rem;
+ }
+ .Contacts-hr{
+  border-top: .05rem solid #1ebba3;
+ }
+ /* for developer */
+ 
+
+ .dark{
+  padding-top: 2rem;
+}
+hr.socket{
+  width: 100%;
+  border-top: .2rem solid #666b71;
+  margin-top: 3rem;
+}
+/* Media Queries */
+@media (max-width:767px){
+  .caption h1{
+    font-size: 2.3rem; 
+    letter-spacing: .15rem;  
+    padding-bottom: .5rem;
+  }
+  .caption h3{
+    font-size: 1.2rem;
+  
+    padding-bottom: 1.2rem;
+  }
+  .btn-lg{
+    padding: .5rem 1rem;
+    font-size: 1rem;
+  }
+  .narrow h1{
+    font-size: 1.8rem;
+  }
+  .contact img{
+    width: 50%;
+   display: block;
+   margin: 0 auto; 
+}
+footer img{
+   margin: 1rem auto;
+}
+}
+.modal{	
+	padding-top: 5rem;
+}
+.modal-body{
+	background-color: rgba(red, green, blue, 0.3);
+	padding: 0.3rem;
+}
+#form_modal .modal-body{
+	background-color: wheat;
+}
+.for_popularItem{
+	box-shadow: 0 0 1px #233f50;
+ 
+}
+.for_popularItem:hover{
+	box-shadow: 0 0 8px #233f50;
+ 
+}
+.priceFor:hover{
+
+}
+#detailFirst{
+	padding: 10px;
+}
+.contacts>a{
+	text-decoration: none;
+}
+
+</style>
+	
 </head>
-<body data-spy="scroll" data-target=".navbar" data-offset="65">
+<body data-spy="scroll" data-target="#navbarResponsive"">
+
+<!-- start Home -->
+<div id="home">
+	<!-- starts navigation bar -->
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a href="#" class="navbar-brand" style="margin-top: 7px;">User Management System</a>
+		<!-- logo needed -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+			<span class="navbar-toggler-icon">
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				
+				<li class="nav-item">
+					<a href="#About" class="nav-link">About</a>
+				</li>
+                                <li class="nav-item">
+					<a href="#user" class="nav-link">Sign up</a>
+				</li>
+                                <li class="nav-item">
+					<a href="#user" class="nav-link">Login</a>
+				</li>
+			</ul>
+
+		</div>
+
+	</nav>  
+	<!-- end bavigation bar -->
+
+	<!-- landing page section -->
+	<div class="landing">
+		<div class="home-wrap">
+			<div class="home-inner">
+
+			</div>
+		</div>
+	</div>
+	<div class="caption text-center">
+		<h1>Welcome to Hello-Megha</h1>
+		<h3>For User Management</h3>
+                <a href="#user" class="btn btn-outline-primary btn-lg" style="margin-top: 73px;" >Start Now</a>
+	</div>
+	<!-- end landing page section -->
+</div>
+
+</div>
+<!-- STart of the about page -->
+<div id="About" class="offset">
+	<!-- this is the start of the Jumbotron -->
+	<div class="jumbotron">
+		<div class="narrow text-center about">
+				<div class="col-12">
+					<h3 class="heading">
+						About
+					</h3>
+					<div class="heading-underline"></div>
+					<p>Add or remove users, modify profile and authorization attributes,
+and identify root-cause user login issues in minutes with a simple,
+intuitive and powerful web interface provided by Hello-Megha</p>
+				</div>
+			
+		</div> <!-- end narrow -->
+	</div>
+	<!-- end of jumbotron -->
+</div>
+<!-- end of the About section --> 
+
+<!-- ends of the products section -->
+	<!-- start About -->
+
+</div>
+
 <%
      if(session.getAttribute("error") !=null){
           String error=(String)session.getAttribute("error");
@@ -63,255 +473,10 @@ if(session.getAttribute("username") == null){
  
 <!--code by ishan-->
 
-	<!--Preloader-->
-	<div id="preloader">
-		<div id="status">
-			&nbsp;
-		</div>
-	</div>
-
-	<!--Header-->
-	<header>
-		<nav class="navbar navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="site-nav-wrapper">
-					<div class="navbar-header">
-
-						<!--Logo
-						<a href="#home" class="navbar-brand smooth-scroll">
-							<img src="img/logo/logo.png" alt="Logo">
-						</a>-->
-					</div>
-
-					<!--Main menu-->
-					<div class="container">
-						<div class="collapse navbar-collapse"> 
-							<ul class="nav navbar-nav pull-right">
-								<li><a class="smooth-scroll" href="#home">Home</a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#about">About</a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#team">Team</a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#"></a></li>
-								<li><a class="smooth-scroll" href="#user">Login</a></li>
-								<li><a class="smooth-scroll" href="#user">Signup</a></li>
-							</ul>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</nav>
-	</header>
-	<!--Header ends-->
-
-	<!--Home-->
-	<section id="home">
-		<!--background image-->
-		
-		<img src="img/background/bg1.jpg" id="home-bg-image">
-
-		<!--Overlay-->
-		<div id="home-overlay"></div>
-
-		<!--Home Content-->
-		<div id="home-content">
-			<div id="home-content-inner" class="text-center">
-				<div id="home-heading">
-					<h1 id="home-heading-1"><span>User</span> Management</h1><br>
-					<h1 id="home-content-2">App For <span>Use</span></h1>
-				</div>
-				
-				<div id="home-btn">
-					<a class="btn btn-general btn-home smooth-scroll" href="#about" title="Start Now" role="button">Start Now</a>
-				</div>
-			</div>
-		</div>
-
-		<!--Arrow down-->
-		<a href="#about" id="arrow-down" class="smooth-scroll">
-			<i class="fa fa-angle-down"></i>
-		</a>
-	</section>
-	<!--Home ends-->
-
-	<!--About-->
-	<section id="about">
-		<div id="about-01">
-			<div class="content-box-lg">
-				<div class="container">
-					<div class="row">
-
-						<!--About Left side-->
-						<div class="col-md-6">
-							<div id="about-left">
-								<div class="vertical-heading">
-									<h5>Who We Are</h5>
-									<h2>A <strong>Story</strong> <br> About Us</h2>
-								</div>
-							</div>
-						</div>
-
-						<!--About Right side-->
-						<div class="col-md-6">
-							<div id="about-right">
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat. Duis aute irure dolor in reprehen
-								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-		</div>	
-	</section>
-	<!--About ends-->
-
-	<!--Statement-->
-	<section id="statement">
-		<div class="content-box-lg">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div id="tech-statement" class="text-center">
-							<h3> <i class="fa fa-quote-left"></i> User Management describes the ability for administrators, <br>to manage user access to various IT resources. <i class="fa fa-quote-right"></i></h3>
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--Statement ends-->
-
-	<!--Team-->
-	<section id="team">
-		<div class="content-box-lg">
-			<div class="container">
-				<!--Team members-->
-				<div class="row">
-					<!--Team left side-->
-					<div class="col-md-6">
-						<div id="team-left">
-							<div class="vertical-heading">
-									<h5>Who We Are</h5>
-									<h2>Meet Our <br><strong>Talented</strong> Team </h2>
-								</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								qmollit anim id est laborum.</p>
-							
-						</div>
-					</div>
-
-					<!--Team right side-->
-					<div class="col-md-6">
-						<div id="team-members" class="owl-carousel owl-theme">
-
-							<!--Member 01-->
-							<div class="team-member">
-								<img src="img/team/Ishan.jpg" alt="team member" class="img-responsive">
-								<div class="team-member-overlay">
-									<div class="team-member-info text-center">
-										<h6>Ishan Stha</h6>
-										<p> Web Designer</p>
-										<ul class="social-list">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-google-plus"></i></a></li>	
-										</ul>
-									</div>
-								</div>
-							</div>
-
-							<!--Member 02-->
-							<div class="team-member">
-								<img src="img/team/Hukum.jpg" alt="team member" class="img-responsive">
-								<div class="team-member-overlay">
-									<div class="team-member-info text-center">
-										<h6>Hukum Gosain</h6>
-										<p> Web Developer</p>
-										<ul class="social-list">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-google-plus"></i></a></li>	
-										</ul>
-									</div>
-								</div>
-							</div>
-
-							<!--Member 03-->
-							<div class="team-member">
-								<img src="img/team/Megha.jpg" alt="team member" class="img-responsive">
-								<div class="team-member-overlay">
-									<div class="team-member-info text-center">
-										<h6>Megha Magar</h6>
-										<p> Project Manager</p>
-										<ul class="social-list">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-google-plus"></i></a></li>	
-										</ul>
-									</div>
-								</div>
-							</div>
-
-							<!--Member 04-->
-							<div class="team-member">
-								<img src="img/team/Milan.jpg" alt="team member" class="img-responsive">
-								<div class="team-member-overlay">
-									<div class="team-member-info text-center">
-										<h6>Milan Dangol</h6>
-										<p> Database Administrator</p>
-										<ul class="social-list">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-google-plus"></i></a></li>	
-										</ul>
-									</div>
-								</div>
-							</div>
-
-							<!--Member 05-->
-							<div class="team-member">
-								<img src="img/team/team-2.jpg" alt="team member" class="img-responsive">
-								<div class="team-member-overlay">
-									<div class="team-member-info text-center">
-										<h6>Nikesh Lawat</h6>
-										<p> Digital Operations Manger</p>
-										<ul class="social-list">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-google-plus"></i></a></li>	
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--Team ends-->
 
 <!--end of code by ishan-->
 
-<section class="user"  style="padding-top: 100px;">
+<section class="user"  style="padding-top:187px;">
   <div class="user_options-container">
     <div class="user_options-text">
       <div class="user_options-unregistered">
@@ -327,15 +492,15 @@ if(session.getAttribute("username") == null){
       </div>
     </div>
     
-      <div class="user_options-forms" id="user_options-forms" >
-        <div class="user_forms-login" id="user">
+      <div class="user_options-forms" id="user_options-forms" style="top:12px;" >
+          <div class="user_forms-login" id="user"">
           <h2 class="forms_title">Login</h2>
-          <%String loginError="";
+          <%String login="";
           if(session.getAttribute("loginError") !=null){
-          loginError=(String)session.getAttribute("loginError");
+          login=(String)session.getAttribute("loginError");
           
           %>
-           <span><%= loginError%></span>
+           <span><%= login%></span>
         <% session.removeAttribute("loginError");
             }
         %>
@@ -351,7 +516,7 @@ if(session.getAttribute("username") == null){
             </div>
           </fieldset>
           <div class="forms_buttons">          
-           <a href="resetPassword.jsp"><button type="button" class="forms_buttons-forgot">Forgot password?</button></a> 
+              <a href="resetPassword.jsp" ><button type="button" class="forms_buttons-forgot">Forgot password?</button></a> 
             <input type="submit" value="Log In" class="forms_buttons-action">
           </div>
         </form>
@@ -400,25 +565,13 @@ if(session.getAttribute("username") == null){
 
 
 	<!--Footer-->
-	<footer class="text-center">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<p>
-						Copyright &copy; 2020 All Rights Reserved By <span>Herald College Kathmandu.</span>
-					</p>
-				</div>
-			</div>
-		</div>
-
-		<!--Back to top-->
-		<a href="#home" id="back-to-top" class="btn btn-sm btn-yellow btn-back-to-top smooth-scroll" title="home" role="button">
-			<i class="fa fa-angle-up"></i>
-		</a>
 	
-	</footer>
+        <p style="text-align: center">
+						Copyright &copy; 2020 All Rights Reserved By <span>Herald College Kathmandu.</span>
+		</p>
+			
+	
 	<!--Footer ends-->
-
 <!--Password and Confir password must match-->
 <script language='javascript' type='text/javascript'>
 function check(input) {

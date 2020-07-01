@@ -39,6 +39,7 @@ public class Logout extends HttpServlet{
                 //save history
                 
                 session.removeAttribute("username");
+                session.removeAttribute("loginError");
                 session.removeAttribute("userID");
                 session.removeAttribute("role");
                 response.sendRedirect("welcome.jsp");

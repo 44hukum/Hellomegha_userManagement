@@ -47,7 +47,7 @@ public class BlockUser {
 return false;
     }
     
-      //block user
+      //unblock user
     public  boolean unblockUser(int userID){
        		
 		String sql="update userRegistration set Status='Active' where userID=?";
@@ -58,6 +58,68 @@ return false;
 		statement.setInt(1,userID);
 		
                 
+                
+	 
+		try {			
+			if(statement.execute() == false){
+				return true;
+				
+			}
+		}catch(Exception e) {}
+	
+		if(statement !=null) {
+			statement.close();
+		}
+		if(con !=null) {
+			con.close();
+		}
+              } catch (SQLException ex) {
+            Logger.getLogger(DeleteRecord.class.getName()).log(Level.SEVERE, null, ex);
+            }
+return false;
+    }
+    //unblock user
+     public  boolean unblockUser(String username){
+       		
+		String sql="update userRegistration set Status='Active' where username=?";
+		Connection con=connection.makeConnection();		
+		PreparedStatement statement=null;
+        try {
+            statement = con.prepareStatement(sql);       
+		statement.setString(1,username);
+		
+                
+                
+	 
+		try {			
+			if(statement.execute() == false){
+				return true;
+				
+			}
+		}catch(Exception e) {}
+	
+		if(statement !=null) {
+			statement.close();
+		}
+		if(con !=null) {
+			con.close();
+		}
+              } catch (SQLException ex) {
+            Logger.getLogger(DeleteRecord.class.getName()).log(Level.SEVERE, null, ex);
+            }
+return false;
+    }
+    
+    
+    //block user with username
+     public  boolean blockUser(String username){
+       		
+		String sql="update userRegistration set Status='Blocked' where username=?";
+		Connection con=connection.makeConnection();		
+		PreparedStatement statement=null;
+        try {
+            statement = con.prepareStatement(sql);       
+		statement.setString(1,username);  
                 
 	 
 		try {			

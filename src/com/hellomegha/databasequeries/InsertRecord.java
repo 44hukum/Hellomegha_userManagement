@@ -16,30 +16,21 @@ public class InsertRecord implements RecordInsertition{
 		//creates the time stamp
 		java.sql.Date date=new java.sql.Date(Calendar.getInstance().getTime().getTime());
 		java.sql.Timestamp time=new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
-			
+		try{	
 		String sql="insert into userHistory(userID,Date,time,Activity_log) values(?,?,?,?)";
 		Connection con=connection.makeConnection();		
 		PreparedStatement statement=con.prepareStatement(sql);
 		statement.setInt(1,userID);
 		statement.setDate(2, date);
 		statement.setTimestamp(3, time);
-		statement.setString(4, reason);
-		
-		try {			
-			if(statement.execute() == false){
-				return true;
-				
-			}
-		}catch(Exception e) {}
-	
-		if(statement !=null) {
-			statement.close();
-		}
-		if(con !=null) {
-			con.close();
-		}
-		return false;
-	}
+		statement.setString(4, reason);		
+		statement.execute();
+                
+		return true;
+                }catch(Exception e) {
+        }
+	return false;
+                }
 //admin history data insertition
 	public boolean intoAdminHistory(int adminID,String reason) throws SQLException {
 		//creates the time stamp

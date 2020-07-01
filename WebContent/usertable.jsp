@@ -39,9 +39,13 @@
     <ul class="navbar-nav sidebar sidebar-dark " id="Sidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Dashboard">
+        <div class="sidebar-brand-icon ">
+             <% if(session.getAttribute("role").equals("admin")){ %> 
+        <i class="fas fa-user-shield"></i>
+          <%}else{%>
+          <i class="fas fa-user"></i>
+        <%}%>
         </div>
           
           

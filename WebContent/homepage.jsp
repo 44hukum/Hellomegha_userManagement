@@ -1,3 +1,4 @@
+<%@page import="com.hellomegha.databasequeries.RegisteredUser"%>
 <%@page import="com.hellomegha.databasequeries.CountUser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -15,7 +16,18 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <link href="css/sb-admin-2.css" rel="stylesheet">
-     
+  <style>
+      a[href="logout"]{
+      text-decoration: none;        
+      }
+      a[href="logout"]:hover{
+          color: green;
+      }
+      a[href="profile"]{
+      text-decoration: none;        
+      }
+      
+  </style>
 </head>
 <body id="page-top">
 
@@ -30,8 +42,12 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Dashboard">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon ">
+            <% if(session.getAttribute("role").equals("admin")){ %> 
+        <i class="fas fa-user-shield"></i>
+          <%}else{%>
+          <i class="fas fa-user"></i>
+        <%}%>
         </div>
           
         <% if(session.getAttribute("role").equals("admin")){ %> 
@@ -70,13 +86,13 @@
           <span>Users</span>
         </a>
       </li>
-
+<!--
       <li class="nav-item">
-        <a class="nav-link collapsed" href="" >
+        <a class="nav-link collapsed" href="Report.jsp" >
           <i class="fas fa-file"></i>
           <span>Report</span>
         </a>
-      </li>
+      </li>-->
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -118,7 +134,7 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
+          <!-- Page Heading Report Generate -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             <% if(session.getAttribute("role").equals("admin")){%>
@@ -131,24 +147,24 @@
 
             <!-- Container 1 -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card border-left-primary shadow h-100 py-2" style="border-left: .25rem solid #78b6ea !important">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">My History</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">View history</div>
+                      <div class="text-xs font-weight-bold text-dark text-uppercase mb-2">My History</div>
+                      <a href="profile"><div class="h5 mb-0 font-weight-bold text-gray-800">View history</div></a> 
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                      <i class="fas fa-calendar fa-2x"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- Total user and user calculation -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card border-left-primary shadow h-100 py-2" style="border-left: .25rem solid #78b6ea !important">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -158,60 +174,62 @@
                             double adminP=user.countAdmin();
                             double useRr=user.countBlockedUser();
                              int blockedUser=0;
+                             int activeUser=0;
                             try{
                                 blockedUser=(int)(useRr/totalUser *100);
+                                activeUser=(int)((totalUser-useRr)/totalUser *100);
                             }catch(Exception e){
                                  
                             }    
                         %>
-                      <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Total Users</div>
+                      <div class="text-xs font-weight-bold text-dark text-uppercase mb-2">Total Users</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><%= (int)totalUser%></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
+                      <i class="fas fa-user fa-2x"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- Blocked user-->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card border-left-primary shadow h-100 py-2" style="border-left: .25rem solid #78b6ea !important">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Blocked Users</div>
+                      <div class="text-xs font-weight-bold text-dark text-uppercase mb-2">Blocked Users</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%=blockedUser%>%</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold "><%=blockedUser%>%</div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-dark" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-success" role="progressbar" style="width: <%=blockedUser%>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                      <i class="fas fa-clipboard-list fa-2x "></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Pending Requests Card Example -->
+            <!-- Admin panel -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
+              <div class="card border-left-primary shadow h-100 py-2"  style="border-left: .25rem solid #78b6ea !important">
+                <div class="card-body" >
+                  <div class="row no-gutters align-items-center" >
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Profile</div>
+                      <div class="text-xs font-weight-bold text-dark text-uppercase mb-2">Total Admin</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><%=(int)adminP%></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                      <i class="fas fa-comments fa-2x"></i>
                     </div>
                   </div>
                 </div>
@@ -223,11 +241,11 @@
 
           <div class="row">
 
-            <!-- Area Chart -->
+            <!-- Growthrate -->
             <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <!-- Card Header -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" >
                   <h6 class="m-0 font-weight-bold text-dark">Growth Rate</h6>
                 </div>
                 <!-- Card Body -->
@@ -328,13 +346,16 @@
   </div>
 
 </div>
-
+<%
+RegisteredUser counter=new RegisteredUser();
+String u[]=counter.countUser();
+%>
   
   <!--end of form submission to generate report-->
   
  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script>
- var x=[1, 11, 11,11, 11, 11, 1];
+ var x=[<%=u[0]%>, <%=u[1]%>, <%=u[2]%>,<%=u[3]%>, <%=u[4]%>, <%=u[5]%>,<%=u[6]%>,<%=u[7]%>];
  var options = {
           series: [
           {
@@ -377,9 +398,9 @@
           size: 1
         },
         xaxis: {
-          categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          categories: ['01am-03am', '03am-06am', '06am-09am','09am-12pm','12pm-14pm', '14pm-17pm','17pm-20pm','20pm-24am'],
           title: {
-            text: 'Days'
+            text: 'Hours from 01:00am-24:00pm'
           }
         },
         yaxis: {
@@ -400,8 +421,8 @@
         chart.render();
       
       //donut chart
-      var xo=41;
-      var xy=17;
+      var xo=<%=activeUser%>;
+      var xy=<%=blockedUser%>;
       var option = {
           series: [xo, xy],
           chart: {
@@ -425,7 +446,7 @@
         
   function generateR(){
        // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+    window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }

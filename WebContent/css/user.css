@@ -219,8 +219,9 @@ input::placeholder {
 }
 .user_registered-login:hover,
 .user_unregistered-signup:hover {
-  color: rgba(34, 34, 34, 0.85);
-  background-color: #ccc;
+  /*! color: rgba(34, 34, 34, 0.85); */
+  /*! background-color: #ccc; */
+  color: #1ebba3;
 }
 
 /**
@@ -309,7 +310,8 @@ input::placeholder {
   transition: background-color 0.2s ease-in-out;
 }
 .user_options-forms .forms_buttons-action:hover {
-  background-color: #e14641;
+  /*! background-color: #e14641; */
+  color: #1ebba3;
 }
 .user_options-forms .user_forms-signup,
 .user_options-forms .user_forms-login {

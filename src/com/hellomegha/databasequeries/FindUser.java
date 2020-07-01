@@ -31,6 +31,17 @@ public class FindUser implements UserRecord{
 			return result;
 		}
 		return result;
+        }
+             public ResultSet getUser(Integer id) throws SQLException {	//checks if the user exist or not in the users database
+		try {
+		PreparedStatement statement=connection.makeConnection().prepareStatement("select * from userRegistration where "
+				+ "userID=?");
+		statement.setInt(1, id);
+		result=statement.executeQuery();
+		}catch(Exception e)	{
+			return result;
+		}
+		return result;
 				
 	}//end of is user
 	
@@ -82,6 +93,11 @@ public class FindUser implements UserRecord{
 				+ "Date>=? AND  Date<=? AND Reason_log='Blocked'");
 		statement.setDate(1, start);		
 		statement.setDate(2, end);		
+		return statement.executeQuery();	
+	}
+        public ResultSet blockedUserTableRecord() throws SQLException {	 //Takes the connection to the database
+		PreparedStatement statement=connection.makeConnection().prepareStatement("select * from blockedUser");
+			
 		return statement.executeQuery();	
 	}
 	

@@ -47,5 +47,27 @@ public class DeleteRecord {
             }
 return false;
     }
+    
+     public  boolean deleteUser(String username){
+       		
+		String sql="Delete from userRegistration where username=?";
+		Connection con=connection.makeConnection();		
+		PreparedStatement statement=null;
+        try {
+            statement = con.prepareStatement(sql);       
+            statement.setString(1,username);
+	      
+                
+	 
+				
+		statement.execute();
+		return true;
+                        
+	
+              } catch (SQLException ex) {
+            Logger.getLogger(DeleteRecord.class.getName()).log(Level.SEVERE, null, ex);
+            }
+return false;
+    }
 
 }

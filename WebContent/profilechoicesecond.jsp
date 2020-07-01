@@ -1,12 +1,178 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="com.hellomegha.databasequeries.CountUser"%>
 <%@page import="com.hellomegha.databasequeries.FindUser" pageEncoding="UTF-8"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <link rel="stylesheet" type="text/css" href="./Resources/css/profilesecond.css">
 <link rel="stylesheet" type="text/css" href="./Resources/style.css">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+  <title> User - Dashboard</title>
 
- <a href="Dashboard">Go Back</a> 
-<section>
-  <%
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="css/sb-admin-2.css" rel="stylesheet">
+</head>
+<body id="page-top">
+
+    <% if(session.getAttribute("username") !=null){
+            
+    %>
+<!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav sidebar sidebar-dark " id="Sidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Dashboard">
+        <div class="sidebar-brand-icon ">
+           <% if(session.getAttribute("role").equals("admin")){ %> 
+        <i class="fas fa-user-shield"></i>
+          <%}else{%>
+          <i class="fas fa-user"></i>
+        <%}%>
+        </div>
+          
+        <% if(session.getAttribute("role").equals("admin")){ %> 
+	<div class="sidebar-brand-text mx-3"> Admin </div>
+	<%}else{ %>
+        <div class="sidebar-brand-text mx-3"> User </div> 
+        <%} %>
+        <!--<div class="sidebar-brand-text mx-3"> User </div>-->
+        
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item ">
+        <a class="nav-link" href="Dashboard">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item active">
+        <a class="nav-link collapsed" href="profile" >
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="user-info" >
+          <i class="fas fa-list"></i>
+          <span>Users</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" >
+          <i class="fas fa-file"></i>
+          <span>Report</span>
+        </a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Topbar Search -->
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-dark" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+
+                  <!--<a href="logout">logout</a>-->
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ">
+
+             <!--Nav Item - User Information--> 
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                      <!--change here or say manage here-->
+                      Hello Megha
+                      
+                  </span>
+                <img class="img-profile rounded-circle" src="img/team/team-1.jpg">
+              </a>
+               <!--Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="profile">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <!-- End of Navbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid" style="height: 100%;">
+
+          <!-- Page Heading -->
+          
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-6 col-lg-6">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-dark">History</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area">
+                      
+                      
+                      <%
       int frequency=0;
       String username="";
       ResultSet result=null;      
@@ -22,7 +188,7 @@
         int uid=0;
         String status="";
       if(request.getParameter("textVal") !=null){
-            username=request.getParameter("textVal"); //if admin tries to edit user
+            username=request.getParameter("textVal"); //if admin tries edit user
             result=(new FindUser()).getUser(username);
             try {
             while(result.next()){
@@ -38,7 +204,8 @@
                   status=result.getString("Status");
                 }
            %>
-            <h3>History</h3>
+           
+           <!--<h3>History</h3>-->
                 <h4>User ID: <%=uid%></h4>
                 <div class="userHistory">               
                 <table>
@@ -96,7 +263,7 @@
                     //starts of admin histroy
 
                 %>
-                 <h3>History</h3>
+                 <!--<h3>History</h3>-->
                 <h4>User ID: <%=uid%></h4>
                 <div class="userHistory">
                
@@ -122,9 +289,7 @@
                 </table>
                 
             </div>
-                    <form method="post" action="DeleteProfile">
-                        <input type="submit" value="Delete Account">
-                     </form>
+                    <a href="Dashboard">Delete Account</a>
               <%
                     //end of admin history
               } catch (SQLException e) {
@@ -133,7 +298,7 @@
             }//end of admin details
             else {//for user details
 		result=(new FindUser()).getUser(username);
-                 out.println(session.getAttribute("role"));
+                 //out.println(session.getAttribute("role"));
                   frequency=10;
 	try {
               while(result.next()){
@@ -149,7 +314,7 @@
                     }
                 //userHistory
                            %>
-                           <h3>History</h3>
+                           <!--<h3>History</h3>-->
                 <h4>User ID: <%=uid%></h4>
                 <div class="userHistory">
                 
@@ -175,7 +340,7 @@
                 </table>
                 
             </div>
-                    <!--for own account deltetion-->
+                    <!--for own account deletion-->
                          <a href="Dashboard">Delete Account</a> 
               <%
                     
@@ -185,17 +350,37 @@
     }//end of if statement
           }	//end of main if statement
       %>
-   
-      <div class="wrapper" style="margin-top: -370px;
-     
-margin-left: 300px;">  
-  <div class="profile-card js-profile-card">
-    <div class="profile-card__img">
-    <!-- blob should be managed properly -->
-      <img src="<%= session.getAttribute("profilepic") %>" alt="profile pic">
-    </div>
 
-    <div class="profile-card__cnt js-profile-cnt">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pie Chart -->
+            <div class="col-xl-6 col-lg-7">
+              
+                <div class="card shadow mb-4" >
+                <!-- Card Header - Dropdown -->
+                <!--<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-dark">Profile</h6>
+                </div>
+                <!-- Card Body -->
+                <!--<div class="card-body">
+                  <div class="chart-pie pt-4 pb-2">
+                      <canvas id="myPieChart">
+                            
+                      </canvas>
+                  </div>
+                </div>-->
+                
+                <div class="profile-card js-profile-card" style="height: 50px;" >
+    <!--<div class="profile-card__img">
+    <!-- blob should be managed properly -->
+    <!--  <img src="<%= session.getAttribute("profilepic") %>" alt="profile pic">
+    </div>-->
+
+    <div class="profile-card__cnt js-profile-cnt" style="margin-top: 50px;">
       <div class="profile-card__name"><%=username %></div>
     
       <div class="profile-card__txt"><%= description %><strong> helloMegha</strong></div>
@@ -297,31 +482,35 @@ margin-left: 300px;">
                    <textarea type="text" name="description" placeholder="About">
                    <%= description%>
                    </textarea>
-                                  
+                       
+                   <button class="btn-dark"> Save</button> <button class="js-message-close"> Cancel</button>
+                   
             </div>
-            <div class="profile-card-form__bottom">
+            <!--<div class="profile-card-form__bottom">
               <button class="profile-card__button button--blue" >
                 save
-          </button>
+                </button>
 
          	 <button class="profile-card__button button--gray js-message-close">
            		 Cancel
           		</button>
-        	</div>
+        	</div>-->
       </form>
 
-      <div class="profile-card__overlay js-message-close"></div>
+                   <div class="profile-card__overlay js-message-close" style="height: 90%;"></div>
     </div>
-
-  </div>
-
-</div>
-
-<svg hidden="hidden">
+                
+                
+              </div>
+                
+                   
+                   
+                   
+               <svg hidden="hidden">
   <defs>
    
     <symbol id="icon-github" viewBox="0 0 32 32">
-      <title>github</title>
+      <title>GitHub</title>
       <path d="M16.192 0.512c-8.832 0-16 7.168-16 16 0 7.072 4.576 13.056 10.944 15.168 0.8 0.16 1.088-0.352 1.088-0.768 0-0.384 0-1.632-0.032-2.976-4.448 0.96-5.376-1.888-5.376-1.888-0.736-1.856-1.792-2.336-1.792-2.336-1.44-0.992 0.096-0.96 0.096-0.96 1.6 0.128 2.464 1.664 2.464 1.664 1.44 2.432 3.744 1.728 4.672 1.344 0.128-1.024 0.544-1.728 1.024-2.144-3.552-0.448-7.296-1.824-7.296-7.936 0-1.76 0.64-3.168 1.664-4.288-0.16-0.416-0.704-2.016 0.16-4.224 0 0 1.344-0.416 4.416 1.632 1.28-0.352 2.656-0.544 4-0.544s2.72 0.192 4 0.544c3.040-2.080 4.384-1.632 4.384-1.632 0.864 2.208 0.32 3.84 0.16 4.224 1.024 1.12 1.632 2.56 1.632 4.288 0 6.144-3.744 7.488-7.296 7.904 0.576 0.512 1.088 1.472 1.088 2.976 0 2.144-0.032 3.872-0.032 4.384 0 0.416 0.288 0.928 1.088 0.768 6.368-2.112 10.944-8.128 10.944-15.168 0-8.896-7.168-16.032-16-16.032z"></path>
       <path d="M6.24 23.488c-0.032 0.064-0.16 0.096-0.288 0.064-0.128-0.064-0.192-0.16-0.128-0.256 0.032-0.096 0.16-0.096 0.288-0.064 0.128 0.064 0.192 0.16 0.128 0.256v0z"></path>
       <path d="M6.912 24.192c-0.064 0.064-0.224 0.032-0.32-0.064s-0.128-0.256-0.032-0.32c0.064-0.064 0.224-0.032 0.32 0.064s0.096 0.256 0.032 0.32v0z"></path>
@@ -339,12 +528,12 @@ margin-left: 300px;">
     </symbol>
 
     <symbol id="icon-facebook" viewBox="0 0 32 32">
-      <title>facebook</title>
+      <title>Facebook</title>
       <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
     </symbol>
 
     <symbol id="icon-instagram" viewBox="0 0 32 32">
-      <title>instagram</title>
+      <title>Instagram</title>
       <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
       <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
       <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
@@ -358,8 +547,59 @@ margin-left: 300px;">
   </defs>
 </svg>
 
-</section>
-  <!--user block form-->
+                
+          
+
+            </div>
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            Copyright &copy; 2020 All Rights Reserved By <span>Herald College Kathmandu.</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal Dialog box-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+    <!--user block form-->
                     <form action="BlockUser" method="post"style="display:none;" id="blockD">
                         <input type="text" id="blockUser" value="" name="blockUser">
                         <input type="submit" id="submitB">
@@ -403,3 +643,30 @@ closeBtn.forEach(function (element, index) {
     });
 });
 </script>
+
+  
+  
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/chart-area-demo.js"></script>
+  <script src="js/demo/chart-pie-demo.js"></script>
+
+    <%
+        }else{
+response.sendRedirect("welcome.jsp");
+}
+    %>   
+</body>
+</html>

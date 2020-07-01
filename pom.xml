@@ -7,6 +7,7 @@
   <name>hellomegha</name>
   <description>hellomegha  is a usermanagement web application developed  by team hello-megha
 </description>
+
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
@@ -18,6 +19,7 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.2.3</version>
@@ -25,19 +27,47 @@
           <warSourceDirectory>WebContent</warSourceDirectory>
         </configuration>
       </plugin>
+  
+        <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.22.2</version>
+        </plugin>
+        <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>2.22.2</version>
+        </plugin>
     </plugins>
-  </build>
-  <dependencies>
+</build>
+<!-- ... -->
+<dependencies>
+    <!-- ... -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.6.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.6.0</version>
+    </dependency>    <!-- ... -->
+
   	<dependency>
   		<groupId>mysql</groupId>
   		<artifactId>mysql-connector-java</artifactId>
   		<version>8.0.20</version>
   	</dependency>
-    <dependency>
+    <dependency>        
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>3.1.0</version>
       <type>jar</type>
+    </dependency>
+     
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-params</artifactId>
+      <version>5.6.0</version>
     </dependency>
     <dependency>
       <groupId>javax</groupId>
@@ -46,4 +76,5 @@
       <type>jar</type>
     </dependency>
   </dependencies>
+  
 </project>
